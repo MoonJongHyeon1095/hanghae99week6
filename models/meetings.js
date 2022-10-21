@@ -21,13 +21,40 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Meetings.init({
-    userId: DataTypes.INTEGER,
-    imageUrl: DataTypes.STRING,
-    title: DataTypes.STRING,
-    content: DataTypes.STRING,
-    likeCount: DataTypes.INTEGER,
-    partucupateCount: DataTypes.INTEGER,
-    nickname: DataTypes.STRING
+    meetingId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    userId:{
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    imageUrl:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    title:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    content:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    likeCount:{
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    partucupateCount:{
+      type:DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nickname:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Meetings',
