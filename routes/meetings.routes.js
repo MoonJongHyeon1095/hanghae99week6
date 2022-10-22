@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/authMiddleware')
-
 const MeetingsController = require('../controllers/meetings.controller');
 const meetingsController = new MeetingsController();
+
 
 router.get('/', meetingsController.findAllMeeting);
 router.get('/:meetingId',meetingsController.findOneMeeting);

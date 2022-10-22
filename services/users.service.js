@@ -22,7 +22,7 @@ class UserService {
       email,
       nickname,
       password,
-  });
+    });
 
     return;
   };
