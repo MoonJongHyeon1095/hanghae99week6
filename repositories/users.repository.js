@@ -4,9 +4,9 @@ const { Op } = require("sequelize");
 class UserRepository {
   createUser = async ({ email, nickname, hashed }) => {
     const createUserData = await Users.create({
-      email,
-      nickname,
-      hashed,
+      email: email,
+      nickname: nickname,
+      password: hashed,
     });
 
     return createUserData;

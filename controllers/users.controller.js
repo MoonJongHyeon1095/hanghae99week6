@@ -58,13 +58,11 @@ class UsersController {
       const { email, password } = await joi.loginSchema.validateAsync(
         req.body
       );
-
+      console.log(email,password)
       if (!email || !password) {
         throw new InvalidParamsError("뭐 하나 빼먹으셨는데?");
       }
-
       const token = await this.userService.findUser(req, res);
-
       return res.status(200).json({ token, message: "로그인이 되었다." });
     } catch (error) {
       next(error);

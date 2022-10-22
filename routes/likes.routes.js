@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const LikesController = require('../controllers/likes.controller');
 const likesController = new LikesController();
 
-router.put('/:meetingId', authMiddleware);
+router.put('/:meetingId', authMiddleware,likesController.put);
 
 
 module.exports = router;

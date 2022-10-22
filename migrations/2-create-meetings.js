@@ -29,7 +29,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      partucupateCount: {
+      participateCount: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },

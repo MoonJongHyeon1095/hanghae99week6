@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       allowNull: false,
     },
-    partucupateCount:{
+    participateCount:{
       type:DataTypes.INTEGER,
       allowNull: false,
     },
