@@ -21,9 +21,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Participates.init({
-    meetingId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    nickname: DataTypes.STRING
+    participatesId: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    meetingId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    userId:{ 
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    nickname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {
     sequelize,
     modelName: 'Participates',
