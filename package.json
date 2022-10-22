@@ -1,7 +1,6 @@
 {
   "name": "hh99w6",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +18,14 @@
     "mysql2": "^2.3.3",
     "sequelize": "^6.25.3",
     "sequelize-cli": "^6.5.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoonJongHyeon1095/hanghae99week6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MoonJongHyeon1095/hanghae99week6/issues"
+  },
+  "homepage": "https://github.com/MoonJongHyeon1095/hanghae99week6#readme",
+  "description": ""
 }

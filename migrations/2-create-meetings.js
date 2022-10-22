@@ -13,10 +13,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      imageUrl: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       title: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -28,10 +24,12 @@ module.exports = {
       likeCount: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue:0
       },
       participateCount: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue:0
       },
       nickname: {
         type: Sequelize.STRING,

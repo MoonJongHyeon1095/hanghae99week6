@@ -7,7 +7,7 @@ class ParticipatesController {
     //참여하기 및 참여취소
     put = async(req, res, next) =>{
         try{
-        const { userId } = res.locals.user;
+        const { userId, nickname } = res.locals.user;
         const { meetingId } = req.params;
         console.log(`userId:${userId}`);
         console.log(`meetingId:${meetingId}`);
@@ -22,9 +22,12 @@ class ParticipatesController {
 
           
           if(!findOneparty){
-            await this.participatesService.createParty({userId, meetingId}) //참여가 되어있지 않으면 참여하기
+            await this.participatesService.joinParty({userId, meetingId, nickname}) //참여가 되어있지 않으면 참여하기
             res.status(201).send({msg:"참여하기 완료!"});
-          }else{await this.participatesService.cancelParty({userId, meetingId})} //참여가 되어있으면 참여 취소하기
+          }else{
+            await this.participatesService.cancelParty({userId, meetingId})//참여가 되어있으면 참여 취소하기
+            res.status(201).send({msg:"참여취소"});
+          } 
 
         } catch (error) {
             next(error);

@@ -1,22 +1,22 @@
-const { Likes } = require("../models");
+const { Likes, Meetings } = require("../models");
+
 
 class LikeRepository {
     findOneLike = async ({userId, meetingId}) =>{
-        const findOneParty = await Likes.findOne({ where: { userId, meetingId } });
-
-        return findOneParty;
+        const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
+        return findOneLike;
     };
 
     upLikeCount = async ({ meetingId }) => {
         await Meetings.increment(
-          { participateCount: 1 },
+          { LikeCount: 1 },
           { where: { meetingId } }
         );
       };
 
       downLikeCount = async ({ meetingId }) => {
         await Meetings.increment(
-          { participateCount: -1 },
+          { LikeCount: -1 },
           { where: { meetingId } }
         );
 
@@ -38,7 +38,7 @@ class LikeRepository {
       };
 
       findAllMeeting = async ({ findMeetingId }) => {
-        const findOneMeeting = await Meetings.findAll({ where: { meetingId: findMeetingId },include:[Likes] });
+        const findOneMeeting = await Meetings.findAll({where: { meetingId: findMeetingId },include: {model: Likes, as: 'Likes'}});
         return findOneMeeting;
       };
 

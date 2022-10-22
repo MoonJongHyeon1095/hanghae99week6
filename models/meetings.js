@@ -12,14 +12,19 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.Comments, {
         as: 'Comments',
-        foreignKey: 'meetingid',
+        foreignKey: 'meetingId',
       });
       this.hasMany(models.Participates, {
         as: 'Participates',
-        foreignKey: 'meetingid',
+        foreignKey: 'meetingId',
+      });
+      this.hasMany(models.Likes, {
+        as: 'Likes',
+        foreignKey: 'meetingId'
       });
     }
   }
+  
   Meetings.init({
     meetingId: {
       allowNull: false,
@@ -29,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId:{
       type:DataTypes.INTEGER,
-      allowNull: false,
-    },
-    imageUrl:{
-      type:DataTypes.STRING,
       allowNull: false,
     },
     title:{
@@ -46,10 +47,12 @@ module.exports = (sequelize, DataTypes) => {
     likeCount:{
       type:DataTypes.INTEGER,
       allowNull: false,
+      defaultValue:0
     },
     participateCount:{
       type:DataTypes.INTEGER,
       allowNull: false,
+      defaultValue:0
     },
     nickname:{
       type:DataTypes.STRING,

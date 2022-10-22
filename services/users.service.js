@@ -9,27 +9,23 @@ const jwt = require("jsonwebtoken");
 class UserService {
   userRepository = new UserRepository();
 
-  createUser = async ({email, nickname, hashed}) => {
-
+  createUser = async (users) => {
+    const { email, nickname, password } = users;
     const isExistUser = await this.userRepository.findByEmail({ email });
-    console.log(isExistUser)
+
     if (isExistUser) {
       throw new DuplicateDBDataError(
         "동일한 email을 가진 User가 이미 존재합니다."
       );
     }
 
-    const createUserData = await this.userRepository.createUser({
+    await this.userRepository.createUser({
       email,
       nickname,
-      hashed,
-    });
+      password,
+  });
 
-    return {
-      email : createUserData.email,  
-      nickname: createUserData.nickname,
-      password: createUserData.hashed,
-    };
+    return;
   };
 
   findUser = async (req, res) => {

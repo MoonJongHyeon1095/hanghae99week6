@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Meetings, {
         foreignKey: 'meetingId',
-        targetKey: 'meetingId',
+        // targetKey: 'meetingId',
       });
       this.belongsTo(models.Users, {
         foreignKey: 'userId',
-        targetKey: 'userId',
+        // targetKey: 'userId',
       });
     }
   }
@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     meetingId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Meetings',
+        key: 'meetingId',
+      },
+      onDelete: 'cascade',
     },
     userId:{ 
       type: DataTypes.INTEGER,

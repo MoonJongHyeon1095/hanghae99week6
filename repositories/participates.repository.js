@@ -3,6 +3,7 @@ const { Participates, Meetings, Likes } = require("../models");
 
 class ParticipateRepository {
     findOneParty = async ({userId, meetingId}) =>{
+      console.log(userId,meetingId)
         const findOneParty = await Participates.findOne({ where: { userId, meetingId } });
 
         return findOneParty;
@@ -21,8 +22,9 @@ class ParticipateRepository {
         );
 
       };
-      joinParty = async ({ userId, meetingId }) => {
-        const joinParty = await Participates.create({ userId, meetingId });
+      joinParty = async ({ userId, meetingId, nickname }) => {
+        console.log(nickname)
+        const joinParty = await Participates.create({ userId, meetingId, nickname });
         return joinParty;
       };
 
@@ -37,7 +39,7 @@ class ParticipateRepository {
       };
 
       findAllMeeting = async ({ findMeetingId }) => {
-        const findOneMeeting = await Meetings.findAll({ where: { meetingId: findMeetingId },include:[Likes] });
+        const findOneMeeting = await Meetings.findAll({ where: { meetingId: findMeetingId },include:{model: Likes, as: 'Likes'}});
         return findOneMeeting;
       };
 }

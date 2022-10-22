@@ -17,13 +17,16 @@ class LikesController {
               }
 
               const findOneLike = await this.likesService.findOneLike({userId, meetingId})
-              console.log(`findeOneparty:${findOneLike}`)
+              console.log(`findeOneLike:${findOneLike}`)
     
               
               if(!findOneLike){
                 await this.likesService.createLike({userId, meetingId}) //좋아요 되어있지 않을시 좋아요
                 res.status(201).send({msg:"좋아요!"});
-              }else{await this.likesService.cancelLike({userId, meetingId})} //좋아요 되어 있을시 좋아요취소
+              }else{
+                await this.likesService.cancelLike({userId, meetingId})//좋아요 되어 있을시 좋아요취소
+                res.status(201).send({msg:"좋아요 취소"});
+            } 
             
             } catch (error) {
                 next(error);

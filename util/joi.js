@@ -3,7 +3,14 @@ const { ValidationError } = require("../exceptions/index.exception");
 
 module.exports = {
   signupSchema: Joi.object({
-    email: Joi.string().email({ tlds: { allow: false } }),
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: false } })
+    .required()
+    .error(
+      new ValidationError(
+        "올바른 이메일 형식이 아닙니다."
+      )
+    ),
 
     nickname: Joi.string()
       .min(3)
