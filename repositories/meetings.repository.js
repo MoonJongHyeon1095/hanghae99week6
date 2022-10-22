@@ -13,38 +13,26 @@ findAllMeeting = async ()=>{
 //게시글 단일조회
 findOneMeeting = async (meetingId)=>{
     try{
-        return await Meetings.findOne({where : {meetingId,userId}})       
+        return await Meetings.findOne({where : {meetingId}})       
     }catch(error){
         res.status(400).json({msg : "error"})  
     }
 }
 
 //게시글 작성
-createMeeting = async (userId,title,content)=>{
-    try{
-        await Meetings.create({userId,title,content})
-    }catch(error){
-        res.status(400).json({msg : "error"})  
-    }
+createMeeting = async (userId,nickname,title,content)=>{
+    await Meetings.create({userId,nickname,title,content})  
 }
 
 //게시글 수정
 updateMeeting = async (meetingId,userId,title,content)=>{
-    try{
-        await Meetings.update({title,content}),{where:{meetingId,userId}}
-    }catch(error){
-        res.status(400).json({msg : "error"})  
-    }
+    await Meetings.update({title,content},{where:{meetingId,userId}})
 }
 
 //게시글 삭제
 deleteMeeting = async (meetingId,userId)=>{
-    try{
-        await Meetings.destroy({where:{meetingId,userId}})
-    }catch(error){
-        res.status(400).json({msg : "error"})  
+    await Meetings.destroy({where:{meetingId,userId}})
     }
-}
 }
 
 module.exports = MeetingsRepository;

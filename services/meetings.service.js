@@ -33,25 +33,24 @@ class MeetingsService {
         }
     }
 
-    createMeeting = async(userId,title,content)=>{
-        if(title === undefined || content === undefined){
+    createMeeting = async(userId,nickname,title,content)=>{
+        if(!title || !content){
             res.status(400).json({message : "제목이나 내용을 기입해주세요!"})
         }
-        await this.meetingRepository.createMeeting(userId,title,content)
+        await this.meetingRepository.createMeeting(userId,nickname,title,content)
         return {result:true, message : "게시글이 생성되었습니다."};
     }
 
     updateMeeting = async(meetingId,userId,title,content) =>{
         const updatemeeting = await this.meetingRepository.findOneMeeting(meetingId,userId);
-        if(title === undefined || content === undefined){
+        if(!title || !content){
             res.stauts(400).json({message : "제목이나 내용을 기입해주세요!"})
         }
         if(!updatemeeting){
             res.status(400).json({message : "게시글을 찾을 수 없습니다."})
         }
-        else{
-            await this.meetingRepository.updateMeeting(meetingId,userId,title,content);
-            return {result: true, message: "게시글 수정했습니다."}
+        await this.meetingRepository.updateMeeting(meetingId,userId,title,content);
+        return {result: true, message: "게시글 수정했습니다."}
         }
     }
 
@@ -59,12 +58,9 @@ class MeetingsService {
         const deletemeeting = await this.meetingRepository.findOneMeeting(meetingId,userId);
         if(!deletemeeting){
             res.status(400).json({message : "게시글을 찾을 수 없습니다."})
-        }else{
-            await this.meetingRepository.deleteMeeting(meetingId,userId);
-            return {result : true, message : "게시글이 삭제되었습니다."}
         }
-    }
+        await this.meetingRepository.deleteMeeting(meetingId,userId);
+        return {result : true, message : "게시글이 삭제되었습니다."}
 }
-
 
 module.exports = MeetingsService;

@@ -31,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       allowNull: false,
     },
-    imageUrl:{
-      type:DataTypes.STRING,
-      allowNull: false,
-    },
     title:{
       type:DataTypes.STRING,
       allowNull: false,
@@ -46,10 +42,12 @@ module.exports = (sequelize, DataTypes) => {
     likeCount:{
       type:DataTypes.INTEGER,
       allowNull: false,
+      defaultValue:0
     },
     participateCount:{
       type:DataTypes.INTEGER,
       allowNull: false,
+      defaultValue:0
     },
     nickname:{
       type:DataTypes.STRING,
