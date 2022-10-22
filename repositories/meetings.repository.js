@@ -4,19 +4,11 @@ class MeetingsRepository{
 
 //게시글 전체목록조회
 findAllMeeting = async ()=>{
-    try{
-        return await Meetings.findAll({})
-    }catch(error){
-        res.status(400).json({msg : "error"})      
-    }
+    return await Meetings.findAll({})
 }
 //게시글 단일조회
 findOneMeeting = async (meetingId)=>{
-    try{
-        return await Meetings.findOne({where : {meetingId}})       
-    }catch(error){
-        res.status(400).json({msg : "error"})  
-    }
+    return await Meetings.findOne({where : {meetingId}})
 }
 
 //게시글 작성
