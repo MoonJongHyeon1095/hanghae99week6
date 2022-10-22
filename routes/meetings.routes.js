@@ -7,7 +7,7 @@ const meetingsController = new MeetingsController();
 
 router.get('/', authMiddleware);
 router.get('/:meetingId',authMiddleware);
-router.post('/', authMiddleware);
+router.post('/meetingId', authMiddleware);
 router.put('/:meetingId', authMiddleware);
 router.delete('/:meetingId', authMiddleware);
 

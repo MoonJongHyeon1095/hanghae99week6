@@ -11,9 +11,9 @@ class CommentRepository{
     };
 
     createComment = async(meetingId,userId,comment)=>{
-        const comments = await Comments.create({
-            meetingId,userId,comment
-        })
+        const comments = await Comments.create(
+            {meetingId,userId,comment}
+        )
         return comments
     }
 

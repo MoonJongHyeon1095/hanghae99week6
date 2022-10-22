@@ -7,7 +7,7 @@ const commentsController = new CommentsController();
 
 router.get('/', authMiddleware,commentsController.getComment);
 router.get('/:meetingId', authMiddleware,commentsController.getComment);
-router.post('/:mettingId', authMiddleware,commentsController.createComment);
+router.post('/:meetingId', authMiddleware,commentsController.createComment);
 router.put('/:commentId', authMiddleware,commentsController.updateComment);
 router.delete('/:commentId', authMiddleware,commentsController.deleteComment);
 

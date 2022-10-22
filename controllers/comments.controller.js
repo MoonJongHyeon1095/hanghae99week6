@@ -10,7 +10,7 @@ class CommentsController {
         try {
             const {meetingId} = req.params
             const comments = await this.CommentsService.getComment(
-                {meetingId}
+                meetingId
             )
             res.json({result : comments})
         }catch(error){
@@ -24,14 +24,14 @@ class CommentsController {
             const {user} = res.locals;
             const {comment} = req.body
             const userId = user.userId
-
             if(!comment){
                 res.status(400).send("내용이 없습니다.")
             }
 
             const comments = await this.CommentsService.createComment(
-                {meetingId,userId,comment}
+                meetingId,userId,comment
             )
+                res.send("댓글 작성이 완료되었습니다.")
         }catch(error){
             next(error)
         }
@@ -45,7 +45,7 @@ class CommentsController {
             const userId = user.userId
 
             const comments = await this.CommentsService.updateComment(
-                {commentId,userId,comment}
+                commentId,userId,comment
             )
             res.send("수정이 완료되었습니다.")
     }catch(error){
@@ -57,10 +57,9 @@ class CommentsController {
         const {commentId} = req.params;
         const {user} = res.locals;
         const userId = user.userId
-
         try{
         const comments = await this.CommentsService.deleteCommnet(
-            {commentId,userId}
+            commentId,userId
         )
         res.send("삭제가 완료되었습니다.")
         }catch(error){
