@@ -31,16 +31,15 @@ class UsersController {
       // 비밀번호 hash
       const hashed = await bcrypt.hash(password, 12);
 
+      const users = await Object.create({ email: email, nickname : nickname, password: hashed });
+      
       // hash된 유저 정보를 service로 전달
       // 서비스 계층에 구현된 createUser 로직을 실행합니다.
-      const createUserData = await this.userService.createUser({
-        email,
-        nickname,
-        hashed,
-      });
+      await this.userService.createUser(users);
+
       res
         .status(201)
-        .json({ data: createUserData, message: "회원으로 가입되었다." });
+        .json({ message: "회원으로 가입되었다." });
     } catch (error) {
       next(error);
     }

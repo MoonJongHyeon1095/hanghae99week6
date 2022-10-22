@@ -2,17 +2,17 @@ const { Users } = require("../models");
 const { Op } = require("sequelize");
 
 class UserRepository {
-  createUser = async ({ email, nickname, hashed }) => {
+  createUser = async ( {email, nickname, password }) => {
     const createUserData = await Users.create({
       email,
       nickname,
-      hashed,
-    });
+      password,
+  });
 
     return createUserData;
   };
 
-  findUser = async ({ email, password }) => {
+  findUser = async ( email, password ) => {
     const user = await Users.findOne({
       where: {
         [Op.and]: [{ email }, { password }],

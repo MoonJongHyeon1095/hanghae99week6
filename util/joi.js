@@ -3,7 +3,14 @@ const { ValidationError } = require("../exceptions/index.exception");
 
 module.exports = {
   signupSchema: Joi.object({
-    email: Joi.string().email({ tlds: { allow: false } }),
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: false } })
+    .required()
+    .error(
+      new ValidationError(
+        "올바른 이메일 형식이 아닙니다."
+      )
+    ),
 
     nickname: Joi.string()
       .min(3)
@@ -25,11 +32,20 @@ module.exports = {
   }),
 
   loginSchema: Joi.object({
-    nickname: Joi.string()
-      .min(3)
-      .alphanum()
-      .required()
-      .error(new ValidationError("닉네임 또는 패스워드를 확인해주세요.")),
+    email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: false } })
+    .required()
+    .error(
+      new ValidationError(
+        "올바른 이메일 형식이 아닙니다."
+      )
+    ),
+
+    // nickname: Joi.string()
+    //   .min(3)
+    //   .alphanum()
+    //   .required()
+    //   .error(new ValidationError("닉네임 또는 패스워드를 확인해주세요.")),
     password: Joi.string()
       .min(4)
       .required()
