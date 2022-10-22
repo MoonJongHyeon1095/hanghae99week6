@@ -5,11 +5,11 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const CommentsController = require('../controllers/comments.controller');
 const commentsController = new CommentsController();
 
-router.get('/', authMiddleware);
-router.get('/:meetingId', authMiddleware);
-router.post('/:mettingId', authMiddleware);
-router.put('/:commentId', authMiddleware);
-router.delete('/:commentId', authMiddleware);
+router.get('/', authMiddleware,commentsController.getComment);
+router.get('/:meetingId', authMiddleware,commentsController.getComment);
+router.post('/:mettingId', authMiddleware,commentsController.createComment);
+router.put('/:commentId', authMiddleware,commentsController.updateComment);
+router.delete('/:commentId', authMiddleware,commentsController.deleteComment);
 
 
 module.exports = router;

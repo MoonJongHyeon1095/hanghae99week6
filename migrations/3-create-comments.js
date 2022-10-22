@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      content: {
+      comment: {
         type: Sequelize.STRING,
         allowNull: false,
       },
