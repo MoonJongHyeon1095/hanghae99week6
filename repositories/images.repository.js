@@ -1,1 +1,0 @@
-const{Meetings} = require('../models');

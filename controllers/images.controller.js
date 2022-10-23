@@ -38,6 +38,10 @@ class ImagesController {
       next(error);
     }
   };
+
+  deleteImages = async(req, res, next) => {
+    
+  }
 }
 
 module.exports = ImagesController;
