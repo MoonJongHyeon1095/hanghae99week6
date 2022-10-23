@@ -10,7 +10,7 @@ const upload = require('../util/multer')
 
 
 
-
+router.delete('/images', authMiddleware, imagesController.deleteImage );
 router.get('/', meetingsController.findAllMeeting);
 router.get('/:meetingId',meetingsController.findOneMeeting);
 router.post('/', authMiddleware,meetingsController.createMeeting);
