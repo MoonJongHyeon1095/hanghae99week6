@@ -12,7 +12,7 @@ const s3 = new aws.S3({
     region: process.env.AWS_KEY_REGION,
 });
 
-const upload = multer({
+upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: process.env.AWS_BUCKET,
@@ -42,6 +42,6 @@ const upload = multer({
           ], 
           */
     })
-});
+    });
 
-module.exports = upload
+module.exports = upload;
