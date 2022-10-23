@@ -62,6 +62,10 @@ class MeetingsService {
     }
 
 
+/**
+ * 
+ * 이미지url을 DB에 저장할 필요가 없어 보입니다.
+ * 
     uploadImages = async(imageUrls, userId, meetingId)=> {
         const foundData = await this.meetingRepository.findOneMeeting(meetingId,userId);
         if(!foundData){
@@ -73,6 +77,7 @@ class MeetingsService {
         const uploadImagesData = await this.meetingRepository.uploadImages(uploadedImages, userId, meetingId)
         return uploadImagesData
     }
+    */
 
 }
 module.exports = MeetingsService;

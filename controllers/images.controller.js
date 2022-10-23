@@ -33,7 +33,8 @@ class ImagesController {
         return;
       }
 
-      await this.meetingsService.uploadImages(imageUrls, userId, meetingId);
+      //이미지url을 DB에 저장할 필요가 없어 보입니다.
+      //await this.meetingsService.uploadImages(imageUrls, userId, meetingId);
 
       res.status(200).send(imageUrls);
     } catch (error) {
