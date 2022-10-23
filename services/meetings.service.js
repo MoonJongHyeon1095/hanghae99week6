@@ -61,5 +61,18 @@ class MeetingsService {
         return {result : true, message : "게시글이 삭제되었습니다."}
     }
 
+
+    uploadImages = async(imageUrls, userId, meetingId)=> {
+        const foundData = await this.meetingRepository.findOneMeeting(meetingId,userId);
+        if(!foundData){
+            throw new ValidationError("게시글을 찾을 수 없습니다.")
+        }
+
+        const uploadedImages = imageUrls.join()
+
+        const uploadImagesData = await this.meetingRepository.uploadImages(uploadedImages, userId, meetingId)
+        return uploadImagesData
+    }
+
 }
 module.exports = MeetingsService;

@@ -58,6 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull: false,
     },
+    imageUrls:{
+      type:DataTypes.STRING,
+      allowNull: true,
+    }
   }, {
     sequelize,
     modelName: 'Meetings',

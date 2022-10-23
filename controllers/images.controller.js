@@ -1,6 +1,8 @@
-const multer = require("../util/multer");
+const MeetingsService = require('../services/meetings.service');
 
 class ImagesController {
+  meetingsService = new MeetingsService();
+
   uploadImage = async (req, res, next) => {
     try {
       console.log(req.file);
@@ -17,6 +19,10 @@ class ImagesController {
 
   uploadImages = async (req, res, next) => {
     try {
+      const{userId}= res.locals.user;
+      const{meetingId}= req.params;
+      console.log(meetingId)
+
       const images = req.files
       const imageUrls = images.map((img) => img.location);
 
@@ -24,6 +30,9 @@ class ImagesController {
         res.status(400).send({ message: "이미지가 없다." });
         return;
       }
+           
+      await this.meetingsService.uploadImages(imageUrls, userId, meetingId);
+    
       res.status(200).send(imageUrls);
     } catch (error) {
       next(error);
