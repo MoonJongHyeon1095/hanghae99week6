@@ -6,7 +6,7 @@ class InvalidParamsError extends Error {
       if (!message) this.message = '요청한 데이터 형식이 올바르지 않습니다.';
     }
   }
-  
+
   class ValidationError extends Error {
     constructor(message, status) {
       super(message);
@@ -14,7 +14,7 @@ class InvalidParamsError extends Error {
       this.name = 'ValidationError';
     }
   }
-  
+
   class DuplicateDBDataError extends Error {
     constructor(message, status) {
       super(message);
@@ -22,5 +22,5 @@ class InvalidParamsError extends Error {
       this.name = 'DuplicateDBDataError';
     }
   }
-  
+
   module.exports = { InvalidParamsError, ValidationError, DuplicateDBDataError };

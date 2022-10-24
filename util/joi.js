@@ -40,7 +40,6 @@ module.exports = {
         "올바른 이메일 형식이 아닙니다."
       )
     ),
-
     // nickname: Joi.string()
     //   .min(3)
     //   .alphanum()

@@ -12,14 +12,19 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasMany(models.Comments, {
         as: 'Comments',
-        foreignKey: 'meetingid',
+        foreignKey: 'meetingId',
       });
       this.hasMany(models.Participates, {
         as: 'Participates',
-        foreignKey: 'meetingid',
+        foreignKey: 'meetingId',
+      });
+      this.hasMany(models.Likes, {
+        as: 'Likes',
+        foreignKey: 'meetingId'
       });
     }
   }
+  
   Meetings.init({
     meetingId: {
       allowNull: false,
@@ -53,6 +58,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull: false,
     },
+    imageUrls:{
+      type:DataTypes.STRING,
+      allowNull: true,
+    }
   }, {
     sequelize,
     modelName: 'Meetings',

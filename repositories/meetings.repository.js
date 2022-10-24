@@ -25,6 +25,16 @@ updateMeeting = async (meetingId,userId,title,content)=>{
 deleteMeeting = async (meetingId,userId)=>{
     await Meetings.destroy({where:{meetingId,userId}})
     }
+
+/**
+ * 이미지url을 DB에 저장할 필요가 없어 보입니다.
+ * 
+//이미지 업로드
+uploadImages = async (uploadedImages, userId, meetingId) => {
+    await Meetings.update({imageUrls : uploadedImages},{where:{meetingId,userId}})
+}
+*/
+
 }
 
 module.exports = MeetingsRepository;

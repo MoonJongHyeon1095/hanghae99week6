@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Participates.init({
-    participatesId: {
+    participateId: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
