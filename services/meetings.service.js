@@ -4,8 +4,8 @@ const MeetingsRepository = require('../repositories/meetings.repository');
 class MeetingsService {
     meetingRepository = new MeetingsRepository();
 
+    /**게시글 전체 조회 서비스 */
     findAllMeeting = async ()=>{
-        
         const findallmeeting = await this.meetingRepository.findAllMeeting();
         findallmeeting.sort((a,b)=>{
                 return b.createdAt - a.createdAt;
@@ -15,6 +15,9 @@ class MeetingsService {
                 
         }
 
+        /**게시글 상세조회 서비스
+         * @param {Number} meetingId 조회할 게시글 ID
+         */
     findOneMeeting = async(meetingId)=>{
         const findonemeeting = await this.meetingRepository.findOneMeeting(meetingId)
             return {
@@ -29,6 +32,14 @@ class MeetingsService {
                 participateCount :findonemeeting.participateCount
             }  
         }
+
+        /**게시글 생성 서비스
+         * @param {Number} userId 게시글 생성 하는 유저ID
+         * @param {String} nickname 게시글 생성 유저닉네임
+         * @param {String} title 게시글 제목
+         * @param {String} content 게시글 내용
+         * @returns 생성 메세지 전달
+         */
     createMeeting = async(userId,nickname,title,content)=>{
         if(!title || !content){
             throw new InvalidParamsError("제목이나 내용을 기입해주세요!")
@@ -37,6 +48,13 @@ class MeetingsService {
         return {result:true, message : "게시글이 생성되었습니다."};
     }
 
+    /**게시글 수정 서비스
+     * @param {Number} meetingId 수정할 게시글 ID
+     * @param {Number} userId 수정요청하는 유저ID
+     * @param {String} title 수정할 제목
+     * @param {String} content 수정할 내용
+     * @returns 수정완료 메세지 전달
+     */
     updateMeeting = async(meetingId,userId,title,content) =>{
         const updatemeeting = await this.meetingRepository.findOneMeeting(meetingId,userId);
         if(!title || !content){
@@ -49,6 +67,11 @@ class MeetingsService {
         return {result: true, message: "게시글 수정했습니다."}
         }
 
+        /**게시글 삭제 서비스
+         * @param {Number} meetingId 삭제할 게시글ID
+         * @param {Number} userId 삭제 요청한 유저ID
+         * @returns 삭제완료 메세지 전달
+         */
     deleteMeeting = async(meetingId,userId)=>{
         const deletemeeting = await this.meetingRepository.findOneMeeting(meetingId,userId);
         if(!deletemeeting){

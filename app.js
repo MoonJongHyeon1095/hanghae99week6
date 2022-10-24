@@ -8,9 +8,13 @@ const passport = require('passport');
 const passportConfig = require('./passport');
 const expressSession = require('express-session')
 
+const cors = require('cors');
 const app = express();
 const http = Http.createServer(app);
 const port = process.env.EXPRESS_PORT || 3000;
+
+
+app.use(cors());
 
 passportConfig();
 app.use(express.static('public'));
@@ -32,13 +36,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', require('./routes/users.routes'));
-app.use('/kakao', require('./routes/kakao.routes'))
+app.use('/auth', require('./routes/kakao.routes'));
 app.use('/meetings', require('./routes/meetings.routes'));
 app.use('/comments', require('./routes/comments.routes'));
 app.use('/likes', require('./routes/likes.routes'))
 app.use('/participates', require('./routes/participates.routes'))
 
-//app.use('/images', require('./routes/images.routes'))
+app.use('/images', require('./routes/images.routes'))
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
 

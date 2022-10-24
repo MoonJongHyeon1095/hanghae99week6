@@ -10,15 +10,20 @@ class UsersController {
   userService = new UserService();
   participatesService = new ParticipatesService();
   likesService = new LikesService();
+
   /**
+   * 회원가입 컨트롤러
    * 클라이언트로 부터 받은 유저정보를 검증하고 암호화 합니다.
    * @param {*} req
    * @param {*} res
    * @param {*} next
    */
-  //sign up
+ 
   signup = async (req, res, next) => {
     try {
+      /**
+       * @email
+       */
       const { email, nickname, password, confirm } =
         await joi.signupSchema.validateAsync(req.body);
 
@@ -50,12 +55,12 @@ class UsersController {
   };
 
   /**
+   * 로그인 컨트롤러
    * 클라이언트로부터 받은 정보를 1차적으로 검증하고 service로 전달합니다.
    * @param {*} req
    * @param {*} res
    * @param {*} next
    */
-  //login
   login = async (req, res, next) => {
     try {
       const { email, password } = await joi.loginSchema.validateAsync(
@@ -65,13 +70,21 @@ class UsersController {
       if (!email || !password) {
         throw new InvalidParamsError("뭐 하나 빼먹으셨는데?");
       }
-      const token = await this.userService.findUser(req, res);
-      return res.status(200).json({ token, message: "로그인이 되었다." });
+
+      const { accessToken, refreshToken } = await this.userService.findUser(req, res);
+      return res.status(200).json({ accessToken,refreshToken, message: "로그인이 되었다." });
     } catch (error) {
       next(error);
     }
   };
-  //mypage
+
+  
+  /**
+   * 마이페이지 컨트롤러
+   * @param {*} req 
+   * @param {*} res 
+   * @param {*} next 
+   */
   mypage = async(req, res, next) => {
     try{
       const { userId } = res.locals.user
