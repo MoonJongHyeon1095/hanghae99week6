@@ -11,7 +11,7 @@ class UserService {
 
   createUser = async (users) => {
     const { email, nickname, password } = users;
-    const isExistUser = await this.userRepository.findByEmail({ email });
+    const isExistUser = await this.userRepository.findByEmail( email );
 
     if (isExistUser) {
       throw new DuplicateDBDataError(

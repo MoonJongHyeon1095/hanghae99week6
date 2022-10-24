@@ -23,7 +23,7 @@ class UserRepository {
     return user;
   };
 
-  findByEmail = async ({ email }) => {
+  findByEmail = async ( email ) => {
     const user = await Users.findOne({
       where: {
         email,
