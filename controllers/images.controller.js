@@ -10,7 +10,7 @@ class ImagesController {
       console.log(req.file);
       const imageUrl = req.file.location;
       if (!imageUrl) {
-        es.status(400).send({ message: "이미지가 없다." });
+        res.status(400).send({ message: "이미지가 없다." });
         return;
       }
       res.status(200).json({ imageUrl });
