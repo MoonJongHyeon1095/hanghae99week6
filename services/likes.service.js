@@ -55,10 +55,10 @@ class LikesService {
               })
               });
 
-              console.log('result',result)
-              data.push(result);
-              console.log('data',data)
             
+              data.push(result);
+            
+      
             return data;
           };
 
