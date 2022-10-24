@@ -79,8 +79,8 @@ Multer S3 관련
 
 | 기능 | Method | URL | Request | Response |
 | --- | --- | --- | --- | --- |
-| 로그인 요청 | POST  | /login | {"email" : “test@test.com”, "password": "1234"} | JWT 토큰이 담긴 쿠키
-| 회원가입 | POST | /signup | {"email" : “test@test.com”,"nickname": “test”, "password :"1234"} |
+| 로그인 요청 | POST  | /login | {"email" : “test@test.com”, "password": "1234"} | JWT 토큰이 담긴 쿠키 |
+| 회원가입 | POST | /signup | {"email" : “test@test.com”,"nickname": “test”, "password :"1234"} ||
 | 마이 페이지 | GET | /mypage |
 
 - meetings routes
@@ -88,8 +88,8 @@ Multer S3 관련
 | 기능 | Method | URL | Request | Response |
 | --- | --- | --- | --- | --- |
 | 게시글전체목록조회 | GET | /meetings | | |
-| 게시글 상세조회 | GET | /meetings/:meetingId |
-| 게시글 작성 | POST | /meetings/:meetingId |{title : “너만오면”, content: “고”} |{message : “게시글이 생성되었습니다.”} |
+| 게시글 상세조회 | GET | /meetings/:meetingId | | |
+| 게시글 작성 | POST | /meetings/:meetingId |{title : “너만오면”, content: “고”} |{message : “게시글이 생성되었습니다.”} | 
 | 게시글 이미지 업로드 | POST | /meetings/:meetingId/images| req.files |[  imageUrls : “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, ] |
 | 게시글 수정 | PUT | /meetings/:meetingId |{"meetingId":1,"title" : “너만왔다면”,"content": “고”} |{"message" : “게시글이 수정되었습니다.”}|
 | 게시글 삭제 | DELETE | /meetings/:meetingId |{"meetingId":1} |{"message" : “게시글이 삭제되었습니다.”}|
