@@ -1,30 +1,30 @@
-const multer = require('multer');
-const multerS3 = require('multer-s3');
+const multer = require("multer");
+const multerS3 = require("multer-s3");
 //const multerS3 = require('multer-s3-transform');
-const aws = require('aws-sdk')
+const aws = require("aws-sdk");
 const sharp = require("sharp");
-require('dotenv').config();
-
+require("dotenv").config();
 
 const s3 = new aws.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEYID,
-    secretAccessKey: process.env.AWS_ACCESS_SECRET_KEY,
-    region: process.env.AWS_KEY_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEYID,
+  secretAccessKey: process.env.AWS_ACCESS_SECRET_KEY,
+  region: process.env.AWS_KEY_REGION,
 });
 
-upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: process.env.AWS_BUCKET,
-        contentType: multerS3.AUTO_CONTENT_TYPE,
-        shouldTransform: true,
-        acl: 'public-read',
-        key: function (req, file, cb) {
-            //let extension = path.extname(file.originalname);
-            //cb(null, Date.now().toString() + extension);
-            cb(null, `${Date.now()}_${file.originalname}`);
-          },
-        /**
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET,
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    shouldTransform: true,
+    acl: "public-read",
+    key: function (req, file, cb) {
+      //let extension = path.extname(file.originalname);
+      //cb(null, Date.now().toString() + extension);
+      cb(null, `${Date.now()}_${file.originalname}`);
+    },
+    /**
+
          *이미지 리사이징 추가 공부요망
          *     
         transforms: [
@@ -41,7 +41,8 @@ upload = multer({
             },
           ], 
           */
-    })
-    });
+
+  }),
+})
 
 module.exports = upload;
