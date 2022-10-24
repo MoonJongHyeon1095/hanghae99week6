@@ -24,6 +24,7 @@ const upload = multer({
       cb(null, `${Date.now()}_${file.originalname}`);
     },
     /**
+
          *이미지 리사이징 추가 공부요망
          *     
         transforms: [
@@ -40,6 +41,7 @@ const upload = multer({
             },
           ], 
           */
+
   }),
 })
 

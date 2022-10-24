@@ -36,18 +36,11 @@ module.exports = (sequelize, DataTypes) => {
         unique: true, // UNIQUE, 유일한 값만 존재할 수 있음
         type: DataTypes.INTEGER,
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      nickname: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      snsId: DataTypes.STRING,
+      provider: DataTypes.STRING,
+      email: DataTypes.STRING,  
+      nickname:DataTypes.STRING,
+      password: DataTypes.STRING,
     },
     {
       sequelize,

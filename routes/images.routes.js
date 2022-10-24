@@ -9,5 +9,4 @@ const upload = require('../util/multer')
 
 
 router.post('/', authMiddleware, upload.array('image',5), imagesController.uploadImages );
-
 module.exports = router;

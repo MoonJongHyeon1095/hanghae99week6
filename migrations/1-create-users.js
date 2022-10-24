@@ -21,6 +21,14 @@ module.exports = {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
       },
+      snsId: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull:true,
+      },
+      provider: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull:true,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
