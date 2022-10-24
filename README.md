@@ -89,11 +89,11 @@ Multer S3 관련
 | --- | --- | --- | --- | --- |
 | 게시글전체목록조회 | GET | /meetings | | |
 | 게시글 상세조회 | GET | /meetings/:meetingId | | |
-| 게시글 작성 | POST | /meetings/:meetingId |{title : “너만오면”, content: “고”} |{message : “게시글이 생성되었습니다.”} | 
+| 게시글 작성 | POST | /meetings/:meetingId |{title : “너만오면”, content: “고”} |{"message" : “게시글이 생성되었습니다.”} | 
 | 게시글 이미지 업로드 | POST | /meetings/:meetingId/images| req.files |[  imageUrls : “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, “https://S3버킷이름/이미지이름”, ] |
 | 게시글 수정 | PUT | /meetings/:meetingId |{"meetingId":1,"title" : “너만왔다면”,"content": “고”} |{"message" : “게시글이 수정되었습니다.”}|
 | 게시글 삭제 | DELETE | /meetings/:meetingId |{"meetingId":1} |{"message" : “게시글이 삭제되었습니다.”}|
-| 게시글 이미지 삭제 | DELETE | /meetings/:meetingId/images |{name : 삭제할이미지이름}|{"message" : “이미지가 삭제되었습니다.”}|
+| 게시글 이미지 삭제 | DELETE | /meetings/:meetingId/images |{"name" : "삭제할이미지이름"}|{"message" : “이미지가 삭제되었습니다.”}|
 
 
 <br>   
@@ -102,7 +102,7 @@ Multer S3 관련
 
 | 기능 | Method | URL | Request | Response |
 | --- | --- | --- | --- | --- |
-| 좋아요 등록 및 취소 | PUT | /likes/:meetingId | {meetingId : 1} | |
+| 좋아요 등록 및 취소 | PUT | /likes/:meetingId | {"meetingId" : 1} | |
 
 
 <br>
@@ -112,7 +112,7 @@ Multer S3 관련
 
 | 기능 | Method | URL | Request | Response |
 | --- | --- | --- | --- | --- |
-| 좋아요 등록 및 취소 | PUT | /participates/:meetingId | {meetingId : 1} | |
+| 좋아요 등록 및 취소 | PUT | /participates/:meetingId | {"meetingId" : 1} | |
 
 <br>
 
@@ -121,9 +121,9 @@ Multer S3 관련
 | 기능 | Method | URL | Request | Response |
 | --- | --- | --- | --- | --- |
 | 댓글조회 | GET | /comments/:meetingId || |
-| 댓글 작성| POST | /comments/:meetingId |{"comment": “댓글입니다”}|{message: “댓글이 등록되었습니다”}|
-| 댓글수정 | PUT | /comments/:commentId | {"commentId":1,"conmment": “댓글수정입니다”}| {message : “댓글이 수정되었습니다.”}|
-| 댓글삭제 | DELETE | /comments/:commentId |{commentId:1}|{message : “댓글이 삭제되었습니다.”}|
+| 댓글 작성| POST | /comments/:meetingId |{"comment": “댓글입니다”}|{"message": “댓글이 등록되었습니다”}|
+| 댓글수정 | PUT | /comments/:commentId | {"commentId":1,"conmment": “댓글수정입니다”}| {"message" : “댓글이 수정되었습니다.”}|
+| 댓글삭제 | DELETE | /comments/:commentId |{"commentId":1}|{"message" : “댓글이 삭제되었습니다.”}|
 
 <br>
 
