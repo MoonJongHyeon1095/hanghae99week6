@@ -52,6 +52,15 @@ class MeetingsService {
       meetingId
     );
 
+    const participants = findonemeeting.Participates;
+    const participantsList = [];
+    for(const participant of participants ){
+      const {userId} = participant
+      const participatedUser = await this.meetingRepository.findById(userId)
+      participantsList.push(participatedUser.email, participant.nickname)
+    }
+
+
     let isLike;
     if (foundOneLike) {
       isLike = true;
@@ -70,6 +79,7 @@ class MeetingsService {
       likeCount: findonemeeting.likeCount,
       participateCount: findonemeeting.participateCount,
       isLike,
+      participantsList,
     };
   };
 

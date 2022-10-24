@@ -31,6 +31,10 @@ class UserRepository {
     });
     return user;
   };
+
+  findById = async (userId) => {
+    await Users.findByPk(userId)
+  }
 }
 
 module.exports = UserRepository;

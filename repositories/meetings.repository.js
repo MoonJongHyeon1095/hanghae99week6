@@ -1,4 +1,4 @@
-const{Meetings, Likes} = require('../models');
+const{Meetings, Likes, Participates, Users} = require('../models');
 
 class MeetingsRepository{
 
@@ -11,7 +11,7 @@ findAllMeeting = async ()=>{
 //게시글 단일조회
 findOneMeeting = async (meetingId)=>{
     return await Meetings.findOne({
-        where : {meetingId},
+        where : {meetingId},include: {model: Participates, as: 'Participates'}
     });
 }
 
@@ -20,6 +20,11 @@ findOneLike = async (userId, meetingId) =>{
     const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
     return findOneLike;
 };
+
+findById = async (userId) => {
+    const user = await Users.findByPk(userId)
+    return user
+  }
 
 
 
