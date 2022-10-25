@@ -2,7 +2,7 @@ const { Meetings, Likes, Participates, Users } = require("../models");
 
 class MeetingsRepository {
   findById = async (userId) => {
-    await Users.findByPk(userId);
+    return await Users.findByPk(userId);
   };
 
   /**게시글 전체조회 */
@@ -20,6 +20,12 @@ class MeetingsRepository {
       include: { model: Participates, as: "Participates" },
     });
   };
+
+    /**유저가 좋아요 눌렀는지 조회 */
+    findOneLike = async (userId, meetingId) =>{
+        const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
+        return findOneLike;
+    };
 
   /**게시글 생성
    * @param {Number} userId 작성자ID

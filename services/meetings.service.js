@@ -9,7 +9,6 @@ class MeetingsService {
   meetingRepository = new MeetingsRepository();
 
   /**게시글 전체 조회 서비스 */
-
   findAllMeeting = async (userId) => {
     let data = [];
     let isLike;
@@ -64,7 +63,8 @@ class MeetingsService {
     for (const participant of participants) {
       const { userId } = participant;
       const participatedUser = await this.meetingRepository.findById(userId);
-      participantsList.push(participatedUser.email, participant.nickname);
+      if(participatedUser){participantsList.push({email: participatedUser.email, nickname: participant.nickname});}
+      
     }
 
     let isLike;
