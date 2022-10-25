@@ -1,39 +1,39 @@
 const CommentRepository = require('../repositories/comments.repository')
 
-class CommnetService { 
+class CommentService { 
     constructor(){
         this.CommentRepository = new CommentRepository();
     }
 
     getComment = async(meetingId) =>{
-        const commnets = await this.CommentRepository.getComment(
+        const comments = await this.CommentRepository.getComment(
             meetingId
             )
 
-        return commnets
+        return comments
     };
 
     createComment = async(meetingId,userId,comment)=>{
-        const commnets = await this.CommentRepository.createComment(
+        const comments = await this.CommentRepository.createComment(
             meetingId,userId,comment
             )
             
-        return commnets
+        return comments
     }
 
     updateComment =async(commentId,userId,comment)=>{
-        const commnets = await this.CommentRepository.updateComment(
+        const comments = await this.CommentRepository.updateComment(
             commentId,userId,comment
         )
-        return commnets
+        return comments
     }
 
-    deleteCommnet = async(commentId,userId)=>{
-        const commnets = await this.CommentRepository.deleteComment(
+    deleteComment = async(commentId,userId)=>{
+        const comments = await this.CommentRepository.deleteComment(
             commentId,userId
         )
-        return commnets
+        return comments
     }
 }
 
-module.exports = CommnetService
+module.exports = CommentService
