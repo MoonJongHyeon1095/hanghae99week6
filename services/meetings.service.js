@@ -63,7 +63,8 @@ class MeetingsService {
     for (const participant of participants) {
       const { userId } = participant;
       const participatedUser = await this.meetingRepository.findById(userId);
-      participantsList.push(participatedUser.email, participant.nickname);
+      if(participatedUser){participantsList.push({email: participatedUser.email, nickname: participant.nickname});}
+      
     }
 
     let isLike;

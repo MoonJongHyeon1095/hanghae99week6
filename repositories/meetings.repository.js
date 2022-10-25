@@ -2,7 +2,7 @@ const { Meetings, Likes, Participates, Users } = require("../models");
 
 class MeetingsRepository {
   findById = async (userId) => {
-    await Users.findByPk(userId);
+    return await Users.findByPk(userId);
   };
 
   /**게시글 전체조회 */
