@@ -85,10 +85,19 @@ class LikesService {
                 islike: true
                 }
               });
+<<<<<<< HEAD
               
             
             
             return result;
+=======
+
+            
+              data.push(result);
+            
+      
+            return data;
+>>>>>>> main
           };
 
       

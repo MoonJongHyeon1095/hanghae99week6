@@ -1,25 +1,51 @@
-const{Meetings} = require('../models');
+const{Meetings, Likes, Participates, Users} = require('../models');
 
 class MeetingsRepository{
 
 /**게시글 전체조회 */
 findAllMeeting = async ()=>{
     return await Meetings.findAll({})
+<<<<<<< HEAD
 }
 /**게시글 단일조회
  * @param {Number} meetingId 조회할 게시글ID
  * @returns 조회한 게시글
  */
+=======
+};
+
+
+//게시글 단일조회
+>>>>>>> main
 findOneMeeting = async (meetingId)=>{
-    return await Meetings.findOne({where : {meetingId}})
+    return await Meetings.findOne({
+        where : {meetingId},include: {model: Participates, as: 'Participates'}
+    });
 }
 
+<<<<<<< HEAD
 /**게시글 생성
  * @param {Number} userId 작성자ID
  * @param {String} nickname 작성자nickname
  * @param {String} title 게시글 제목
  * @param {String} content 게시글 내용
  */
+=======
+//유저가 좋아요를 눌렀는지 조회
+findOneLike = async (userId, meetingId) =>{
+    const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
+    return findOneLike;
+};
+
+findById = async (userId) => {
+    const user = await Users.findByPk(userId)
+    return user
+  }
+
+
+
+//게시글 작성
+>>>>>>> main
 createMeeting = async (userId,nickname,title,content)=>{
     await Meetings.create({userId,nickname,title,content})  
 }

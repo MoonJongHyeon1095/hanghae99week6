@@ -49,6 +49,11 @@ class CommentRepository{
             )
             return comments
     }
+
+    findCommentById = async (commentId) => {
+        const isExistComment = await Comment.findByPk(commentId);
+        return isExistComment;
+      };
 }
 
 module.exports = CommentRepository

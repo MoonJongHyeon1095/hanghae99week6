@@ -6,10 +6,15 @@ class MeetingsController {
     /**미팅게시글 전체 불러오기 컨트롤러*/
     findAllMeeting = async(req,res,next)=>{
         try{
+<<<<<<< HEAD
             /** 게시글 전체 불러오기 서비스 호출*/
             const findallmeeting = await this.meetingsService.findAllMeeting();
 
             /**정상적으로 불러오면 데이터 넘겨주기 */
+=======
+            const {userId} = res.locals.user;
+            const findallmeeting = await this.meetingsService.findAllMeeting(userId);
+>>>>>>> main
             res.status(200).json({data:findallmeeting});
         }catch(err){
             next(err)
@@ -19,6 +24,7 @@ class MeetingsController {
     /**미팅게시글 상세조회 컨트롤러*/
     findOneMeeting = async(req,res,next)=>{
         try{
+<<<<<<< HEAD
             /**조회할 게시글ID*/
             const meetingId = req.params.meetingId;
 
@@ -26,6 +32,11 @@ class MeetingsController {
             const findonemeeting = await this.meetingsService.findOneMeeting(meetingId);
 
             /**정상적으로 불러오면 데이터 넘겨주기 */
+=======
+            const {userId} = res.locals.user;
+            const {meetingId} = req.params;
+            const findonemeeting = await this.meetingsService.findOneMeeting(userId, meetingId);
+>>>>>>> main
             res.status(200).json({data:findonemeeting})
         }catch(err){
             next(err) 
