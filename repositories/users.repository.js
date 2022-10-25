@@ -29,15 +29,11 @@ class UserRepository {
     return user;
   };
 
-<<<<<<< HEAD
   /**유저 이메일로 찾기
    * @param {*} email 찾을 유저이메일
    * @returns 찾은 유저정보
    */
-  findByEmail = async ({ email }) => {
-=======
   findByEmail = async ( email ) => {
->>>>>>> main
     const user = await Users.findOne({
       where: {
         email,

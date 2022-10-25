@@ -16,13 +16,9 @@ class UserService {
    */
   createUser = async (users) => {
     const { email, nickname, password } = users;
-<<<<<<< HEAD
-=======
-    const isExistUser = await this.userRepository.findByEmail( email );
->>>>>>> main
 
     //회원가입으로 받은 이메일이 유저DB에 이미 존재하면 에러방생
-    const isExistUser = await this.userRepository.findByEmail({ email });
+    const isExistUser = await this.userRepository.findByEmail( email );
     if (isExistUser) {
       throw new DuplicateDBDataError(
         "동일한 email을 가진 User가 이미 존재합니다."
