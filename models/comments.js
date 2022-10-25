@@ -25,7 +25,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    meetingId: DataTypes.INTEGER,
+    meetingId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Meetings",
+        key: "meetingId"
+      },
+      onDelete: "cascade",
+    },
     userId: DataTypes.INTEGER,
     comment: DataTypes.STRING
   }, {

@@ -18,7 +18,7 @@ class UsersController {
    * @param {*} res
    * @param {*} next
    */
- 
+
   signup = async (req, res, next) => {
     try {
       /**
@@ -79,13 +79,13 @@ class UsersController {
     }
   };
 
-
   /**
    * 마이페이지 컨트롤러
    * @param {*} req 
    * @param {*} res 
    * @param {*} next 
    */
+
   mypage = async(req, res, next) => {
     try{
       const { userId } = res.locals.user
@@ -94,7 +94,7 @@ class UsersController {
       const participates = await this.participatesService.findAllParty({ userId })
 
       res.status(200).json({ likes, participates })
-      
+
     }catch(error) {
       next(error);
     }

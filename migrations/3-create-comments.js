@@ -11,7 +11,11 @@ module.exports = {
       },
       meetingId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        references: {
+          model: "Meetings",
+          key: "meetingId"
+        },
+        onDelete: "cascade",
       },
       userId: {
         type: Sequelize.INTEGER,

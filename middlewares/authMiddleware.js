@@ -43,7 +43,7 @@ module.exports = async (req, res, next) => {
 
     /**AccessToken만 만료시 AccessToken재발급 */
     if (!isAccessTokenValidate) {
-      
+
       /**refresh토큰 에서 유저정보 받아오기 */
       const { userId } = jwt.verify(refreshToken, process.env.SECRET_KEY);
 
