@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  
+
   Meetings.init({
     meetingId: {
       allowNull: false,
