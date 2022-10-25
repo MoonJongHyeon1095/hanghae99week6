@@ -58,6 +58,7 @@ class MeetingsService {
       meetingId
     );
 
+    //email은 Users 테이블에서, nickname은 Meetings 테이블에서 가져왔습니다.
     const participants = findonemeeting.Participates;
     const participantsList = [];
     for (const participant of participants) {
