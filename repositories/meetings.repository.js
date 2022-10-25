@@ -21,6 +21,12 @@ class MeetingsRepository {
     });
   };
 
+    /**유저가 좋아요 눌렀는지 조회 */
+    findOneLike = async (userId, meetingId) =>{
+        const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
+        return findOneLike;
+    };
+
   /**게시글 생성
    * @param {Number} userId 작성자ID
    * @param {String} nickname 작성자nickname

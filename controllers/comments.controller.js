@@ -77,21 +77,6 @@ class CommentsController {
     }
   };
 
-  deleteComment = async (req, res, next) => {
-    const { commentId } = req.params;
-    const { user } = res.locals;
-    const userId = user.userId;
-    try {
-      const comments = await this.CommentsService.deleteComment(
-        commentId,
-        userId
-      );
-      res.send("삭제가 완료되었습니다.");
-    } catch (error) {
-      next(error);
-    }
-  };
-
   /**댓글 삭제 컨트롤러 */
   deleteComment = async (req, res, next) => {
     try {
@@ -105,7 +90,7 @@ class CommentsController {
       const userId = user.userId;
 
       /**댓글삭제 서비스 호출*/
-      await this.CommentsService.deleteCommnet(commentId, userId);
+      await this.CommentsService.deleteComment(commentId, userId);
       /**정상적으로 삭제되면 완료메세지 */
       res.send("삭제가 완료되었습니다.");
     } catch (error) {

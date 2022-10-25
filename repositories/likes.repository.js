@@ -5,6 +5,7 @@ class LikeRepository {
    * @param userId 좋아요한거 찾아올 유저ID
    * @param meetingId 좋아요 요청한 게시글ID
    */
+
   findOneLike = async ({ userId, meetingId }) => {
     const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
     return findOneLike;

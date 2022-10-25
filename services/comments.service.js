@@ -69,7 +69,7 @@ class CommentService {
    * @param {Number} userId 삭제 요청한 유저ID
    */
   deleteComment = async (commentId, userId) => {
-    const isExist = await this.commentRepository.findCommentById(commentId);
+    const isExist = await this.CommentRepository.findCommentById(commentId);
     if (!isExist) throw new ValidationError("그런 댓글이 없어....");
 
     const comments = await this.CommentRepository.deleteComment(

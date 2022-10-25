@@ -9,7 +9,6 @@ class MeetingsService {
   meetingRepository = new MeetingsRepository();
 
   /**게시글 전체 조회 서비스 */
-
   findAllMeeting = async (userId) => {
     let data = [];
     let isLike;

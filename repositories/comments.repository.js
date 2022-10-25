@@ -46,7 +46,7 @@ class CommentRepository {
   };
 
   findCommentById = async (commentId) => {
-    const isExistComment = await Comment.findByPk(commentId);
+    const isExistComment = await Comments.findByPk(commentId);
     return isExistComment;
   };
 }
