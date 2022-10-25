@@ -79,7 +79,7 @@ class UsersController {
     }
   };
 
-  
+
   /**
    * 마이페이지 컨트롤러
    * @param {*} req 

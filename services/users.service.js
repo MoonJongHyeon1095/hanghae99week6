@@ -18,7 +18,7 @@ class UserService {
     const { email, nickname, password } = users;
 
     //회원가입으로 받은 이메일이 유저DB에 이미 존재하면 에러방생
-    const isExistUser = await this.userRepository.findByEmail({ email });
+    const isExistUser = await this.userRepository.findByEmail( email );
     if (isExistUser) {
       throw new DuplicateDBDataError(
         "동일한 email을 가진 User가 이미 존재합니다."
@@ -45,13 +45,14 @@ class UserService {
     const { email, password } = req.body;
     
     //로그인 하려는 유저 회원검증
-    const user = await this.userRepository.findByEmail({ email });
+    console.log("1111111111111111111111111111111111111")
+    const user = await this.userRepository.findByEmail( email );
     if (!user) throw new ValidationError("그런 사람 없어요. 회원가입 했어요?");
     
     // 패스워드 검증
     const isEqualPassword = await bcrypt.compare(password, user.password);
     if (!isEqualPassword) throw new ValidationError("비번이 틀렸어요.");
-    
+    console.log("22222222222222222222222222222222222222")
     // const expires = new Date();
     // expires.setMinutes(expires.getMinutes() + 60); //쿠키 만료시간 60분
 

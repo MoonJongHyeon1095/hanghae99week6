@@ -10,7 +10,7 @@ class ImagesController {
       console.log(req.file);
       const imageUrl = req.file.location;
       if (!imageUrl) {
-        es.status(400).send({ message: "이미지가 없다." });
+        res.status(400).send({ message: "이미지가 없다." });
         return;
       }
       res.status(200).json({ imageUrl });
@@ -43,36 +43,35 @@ class ImagesController {
   };
 
   deleteImage = async (req, res, next) => {
-    try{
-    const { name } = req.body;
-    console.log(name)
+    try {
+      const { name } = req.body;
+      console.log(name);
 
-    const s3 = new aws.S3({
-      accessKeyId: process.env.AWS_ACCESS_KEYID,
-      secretAccessKey: process.env.AWS_ACCESS_SECRET_KEY,
-      region: process.env.AWS_KEY_REGION,
-    });
+      const s3 = new aws.S3({
+        accessKeyId: process.env.AWS_ACCESS_KEYID,
+        secretAccessKey: process.env.AWS_ACCESS_SECRET_KEY,
+        region: process.env.AWS_KEY_REGION,
+      });
 
-    const params = {
-      Bucket: process.env.AWS_BUCKET,
-      Key: name,
-    };
+      const params = {
+        Bucket: process.env.AWS_BUCKET,
+        Key: name,
+      };
 
-    s3.deleteObject(params, function (err, data) {
-      if (err) {console.log(err, err.stack)}
-      else {
-        res.status(200).json({message : '이미지가 지워졌네요.'});
-      } 
-      /*
+      s3.deleteObject(params, function (err, data) {
+        if (err) {
+          console.log(err, err.stack);
+        } else {
+          res.status(200).json({ message: "이미지가 지워졌네요." });
+        }
+        /*
       data = {
       }
       */
-    });
-
-  }catch(error){
-    next(error)
-  }
-
+      });
+    } catch (error) {
+      next(error);
+    }
   };
 }
 
