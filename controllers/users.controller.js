@@ -61,6 +61,7 @@ class UsersController {
    * @param {*} res
    * @param {*} next
    */
+
   login = async (req, res, next) => {
     try {
       const { email, password } = await joi.loginSchema.validateAsync(

@@ -66,8 +66,7 @@ class LikesService {
         findAllLike = async ({ userId }) => {
             const findAllLike = await this.likeRepository.findAllLike({ userId }); //로그인된 유저의 모든 좋아요 정보
             const findMeetingId = findAllLike.map((row) => row.meetingId);  //좋아요누른 게시글 ID
-            let data = [];
-            let like;
+
               const AllMeetings = await this.likeRepository.findAllMeeting({ findMeetingId });
             
                 //좋아요 정보유무에 따라 islike가 true or false
@@ -85,7 +84,7 @@ class LikesService {
                 islike: true
                 }
               });
-              
+            
             
             
             return result;
