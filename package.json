@@ -24,7 +24,11 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:silent": "NODE_ENV=test jest --silent --forceExit",
+    "test:coverage": "NODE_ENV=test jest --coverage --forceExit",
+    "test:unit": "NODE_ENV=test jest test/unit --forceExit",
+    "test:integration": "NODE_ENV=test jest test/integration --forceExit"
   },
   "repository": {
     "type": "git",
@@ -36,5 +40,8 @@
     "url": "https://github.com/MoonJongHyeon1095/hanghae99week6/issues"
   },
   "homepage": "https://github.com/MoonJongHyeon1095/hanghae99week6#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.2.2"
+  }
 }
