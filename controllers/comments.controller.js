@@ -13,8 +13,6 @@ class CommentsController {
       res.json({ result: comments });
     } catch (error) {
       next(error);
-    }
-  };
 
   createComment = async (req, res, next) => {
     try {
