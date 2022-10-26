@@ -3,6 +3,7 @@ const CommentRepository = require('../../../repositories/comments.repository');
 const { 
     commentOutput,
     commentInput,
+    returnCommentId
      } = require('../../fixtures/comment.fixtures');
 
 
@@ -84,9 +85,22 @@ test('commentRepository Method deleteComment',async()=>{
     
     expect(commentRepository.Comments.destroy).toHaveBeenCalledTimes(1);
 
-    expect(comments).toEqual(undefined)
-
     expect(commentRepository.Comments.destroy).toHaveBeenCalledWith({where:{commentId}});
+})
+
+//Id 확인 테스트
+test('commentRepository Method findCommnetById',async()=>{
+
+    commentRepository.Comments.findByPk=jest.fn(()=>{
+        return returnCommentId
+    })
+    const {commentId} = commentInput
+    const comments = await commentRepository.findCommentById(commentId)
+
+    expect(commentRepository.Comments.findByPk).toHaveBeenCalledTimes(1)
+
+    expect(commentRepository.Comments.findByPk).toHaveBeenCalledWith(commentId)
+    
 })
 
 })

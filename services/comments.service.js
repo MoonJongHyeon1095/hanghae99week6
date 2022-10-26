@@ -25,7 +25,7 @@ class CommentService {
   };
 
   updateComment = async (commentId, userId, comment) => {
-    const isExistComment = await this.commentRepository.findCommentById(commentId);
+    const isExistComment = await this.CommentRepository.findCommentById(commentId);
     if (!isExistComment) throw new ValidationError('그런 댓글이 없어....');
 
     const updatedComment = await this.CommentRepository.updateComment(
@@ -39,7 +39,7 @@ class CommentService {
   };
 
   deleteComment = async (commentId, userId) => {
-    const isExist = await this.commentRepository.findCommentById(commentId);
+    const isExist = await this.CommentRepository.findCommentById(commentId);
     if (!isExist) throw new ValidationError('그런 댓글이 없어....');
     
     const comments = await this.CommentRepository.deleteComment(

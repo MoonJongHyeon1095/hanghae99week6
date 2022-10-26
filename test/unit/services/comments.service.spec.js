@@ -3,19 +3,23 @@ const CommentService = require('../../../services/comments.service');
 const { 
     commentOutput,
     commentInput,
+    returnCommentId,
      } = require('../../fixtures/comment.fixtures');
 
 
-const mockCommentModel = () => ({
-    findAll: jest.fn(),
-    findOne: jest.fn(),
-    create: jest.fn(),
-    destroy: jest.fn(),
+const mockCommentRepository = () => ({
+    getComment: jest.fn(),
+    findCommentById: jest.fn(),
+    createComment: jest.fn(),
+    updateComment: jest.fn(),
+    deleteComment:jest.fn()
   });
+
+  
 
 describe('comment Test',()=>{
 let commentService= new CommentService()
-commentService.CommentRepository = Object.assign({},mockCommentModel());
+commentService.CommentRepository = Object.assign({},mockCommentRepository());
 
 beforeEach(()=>{
     jest.resetAllMocks()
@@ -37,8 +41,13 @@ test('commentService Method getComment',async()=>{
 
 })
 
+
 //코멘트 생성 테스트
 test('commentService Method createComment',async()=>{
+    commentService.CommentRepository.findCommentById=jest.fn(()=>{
+        return commentInput
+    })
+    
     
     commentService.CommentRepository.createComment=jest.fn(()=>{
         return commentInput
@@ -53,11 +62,16 @@ test('commentService Method createComment',async()=>{
 })
 
 //코멘트 수정 테스트
-test('commentService Method updateComment',async()=>{
-    
+test('commentService Method updateComment',async()=>{    
     commentService.CommentRepository.updateComment=jest.fn(()=>{
         return commentInput
     })
+    
+    commentService.CommentRepository.findCommentById=jest.fn(()=>{
+        return commentInput
+    })
+    
+
     const {commentId,userId,comment} = commentInput
     const comments = await commentService.updateComment(commentId,userId,comment)
 
@@ -71,6 +85,11 @@ test('commentService Method updateComment',async()=>{
 
 //코멘트 삭제 테스트
 test('commentService Method deleteComment',async()=>{
+
+    commentService.CommentRepository.findCommentById=jest.fn(()=>{
+        return commentInput
+    })
+    
     
     commentService.CommentRepository.deleteComment=jest.fn(()=>{
         return commentInput

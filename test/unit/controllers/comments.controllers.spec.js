@@ -6,6 +6,7 @@ const {
     requestParams,
     responseLocalsUser
      } = require('../../fixtures/comment.fixtures');
+const {InvalidParamsError}= require('../../../exceptions/index.exception')
 
 
 const mockCommentModel = () => ({
@@ -23,7 +24,8 @@ const mockCommentModel = () => ({
   let mockCommentResponse={
     status:jest.fn(),
     json:jest.fn(),
-    locals:jest.fn()
+    locals:jest.fn(),
+    send:jest.fn()
   }
 
   let mockCommentNext = {
@@ -52,15 +54,11 @@ test('commentsController Method getComment',async()=>{
     commentsController.CommentsService.getComment = jest.fn(()=>{
         return arr1
     })
-    await commentsController.getComment(mockCommentRequest,mockCommentResponse,mockCommentNext)
+    await commentsController.getComment(mockCommentRequest,mockCommentResponse)
     
     expect(commentsController.CommentsService.getComment).toHaveBeenCalledTimes(1);
 
-    expect(mockCommentResponse.status).toHaveBeenCalledTimes(1);
-
     expect(mockCommentResponse.json).toHaveBeenCalledTimes(1);
-
-    expect(mockCommentResponse.status).toHaveBeenCalledWith(201)
     
     expect(mockCommentResponse.json).toHaveBeenCalledWith({result:arr1})
     
@@ -69,39 +67,33 @@ test('commentsController Method getComment',async()=>{
 })
 
 //코멘트 생성 테스트
-test('commentService Method createComment',async()=>{
+test('commentsController Method createComment',async()=>{
     mockCommentRequest.params = requestParams
     mockCommentResponse.locals.user = responseLocalsUser
-    mockCommentResponse.body=commentInput
+    mockCommentRequest.body=commentInput
 
     mockCommentResponse.status=jest.fn(()=>{
         return mockCommentResponse
     })
 
-    console.log(mockCommentResponse.body,mockCommentRequest.params)
     commentsController.CommentsService.createComment=jest.fn(()=>{
         return commentInput
     })
 
 
-   await commentsController.createComment(
-    mockCommentRequest,mockCommentResponse,mockCommentNext)
+   await commentsController.createComment(mockCommentRequest,mockCommentResponse)
     
     expect(commentsController.CommentsService.createComment).toHaveBeenCalledTimes(1);
 
-    expect(mockCommentResponse.status).toHaveBeenCalledTimes(1);
+    expect(mockCommentResponse.status).toHaveBeenCalledTimes(0);
 
-    expect(mockCommentResponse.json).toHaveBeenCalledTimes(1);
-
-    expect(mockCommentResponse.status).toHaveBeenCalledWith(201)
-    
-    expect(mockCommentResponse.status).toHaveBeenCalledWith(commentInput)
-    
+    expect(mockCommentResponse.json).toHaveBeenCalledTimes(0);
 
 })
 
+
 //코멘트 수정 테스트
-test('commentService Method updateComment',async()=>{
+test('commentsController Method updateComment',async()=>{
     mockCommentRequest.params = requestParams
     mockCommentResponse.locals.user = responseLocalsUser
     mockCommentResponse.body=commentInput
@@ -110,30 +102,115 @@ test('commentService Method updateComment',async()=>{
         return commentInput
     })
     
-    await commentsController.updateComment(mockCommentRequest,mockCommentResponse,mockCommentNext)
+    await commentsController.updateComment(mockCommentRequest,mockCommentResponse)
 
     expect(commentsController.CommentsService.updateComment).toHaveBeenCalledTimes(1);
     
-    expect(comments).toEqual(commentInput)
+    expect(mockCommentResponse.send).toHaveBeenCalledTimes(1);
 
-    expect(commentsController.CommentsService.updateComment).toHaveBeenCalledWith(commentId,userId,comment);
+    expect(mockCommentResponse.send).toHaveBeenCalledWith("수정이 완료되었습니다.");
 
 })
 
 //코멘트 삭제 테스트
-test('commentService Method deleteComment',async()=>{
-    
+test('commentsController Method deleteComment',async()=>{
+    mockCommentRequest.params = requestParams
+    mockCommentResponse.locals.user = responseLocalsUser
+
     commentsController.CommentsService.deleteComment=jest.fn(()=>{
       
       return commentInput
     })
-    await commentsController.deleteComment(mockCommentRequest,mockCommentResponse,mockCommentNext)
+    await commentsController.deleteComment(mockCommentRequest,mockCommentResponse)
     
     expect(commentsController.CommentsService.deleteComment).toHaveBeenCalledTimes(1);
 
-    expect(comments).toEqual(commentInput)
+    expect(mockCommentResponse.send).toHaveBeenCalledTimes(1)
+    
+    expect(mockCommentResponse.send).toHaveBeenCalledWith("삭제가 완료되었습니다.");
+})
 
-    expect(commentsController.CommentsService.deleteComment).toHaveBeenCalledWith(commentId,userId);
+
+//코멘트 조회 실패 테스트
+test('commentsController Method getComment fail case',async()=>{
+    mockCommentResponse.status=jest.fn(()=>{
+        return mockCommentResponse
+    })
+    mockCommentRequest=jest.fn(()=>{
+        return null
+    })
+    commentsController.CommentsService.getComment=jest.fn(()=>{
+        return null;
+    })
+    try{
+        await commentsController.getComment(mockCommentRequest,mockCommentResponse)
+    }catch(error){
+    expect(error.message).toEqual('게시글이 존재하지 않는데요.')
+
+    expect(error).toBeInstanceOf(InvalidParamsError)
+    }
+})
+
+
+//코멘트 생성 실패 테스트
+test('commentsController Method createComment fail case',async()=>{
+    mockCommentResponse.status=jest.fn(()=>{
+        return mockCommentResponse
+    })
+    mockCommentRequest.params=jest.fn(()=>{
+        return null
+    })
+    commentsController.CommentsService.createComment=jest.fn(()=>{
+        return null;
+    })
+    try{
+        await commentsController.createComment(mockCommentRequest,mockCommentResponse)
+    }catch(error){    
+    expect(error.message).toEqual('게시글이 존재하지 않는데요.')
+
+    expect(error).toBeInstanceOf(InvalidParamsError)
+    }
+})
+
+
+//코멘트 수정 실패 테스트
+test('commentsController Method updateComment fail case',async()=>{    
+    mockCommentResponse.status=jest.fn(()=>{
+        return mockCommentResponse
+    })
+    mockCommentRequest.params=jest.fn(()=>{
+        return null
+    })
+    commentsController.CommentsService.updateComment=jest.fn(()=>{
+        return null;
+    })
+    try{
+        await commentsController.updateComment(mockCommentRequest,mockCommentResponse)
+    }catch(error){       
+        expect(error.message).toEqual('게시글이 존재하지 않는데요.')
+
+        expect(error).toBeInstanceOf(InvalidParamsError)
+    }
+})
+
+
+//코멘트 삭제 실패 테스트
+test('commentsController Method deleteComment fail case',async()=>{
+    mockCommentRequest.params=jest.fn(()=>{
+        return null
+    })
+
+    commentsController.CommentsService.deleteComment=jest.fn(()=>{
+        throw new Error()
+    })
+    try{
+        await commentsController.deleteComment(mockCommentRequest,mockCommentResponse)
+    }catch(error){
+        expect(mockCommentResponse.status).toHaveBeenCalledTimes(1)
+        expect(mockCommentResponse.json).toHaveBeenCalledTimes(1)
+        expect(mockCommentResponse.status).toHaveBeenCalledWith(400)
+        expect(mockCommentResponse.json).toHaveBeenCalledWith(400)
+    }
 })
 
 })

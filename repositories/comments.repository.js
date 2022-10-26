@@ -36,7 +36,7 @@ constructor(){
     }
 
     findCommentById = async (commentId) => {
-        const isExistComment = await Comment.findByPk(commentId);
+        const isExistComment = await this.Comments.findByPk(commentId);
         return isExistComment;
       };
 }

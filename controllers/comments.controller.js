@@ -12,7 +12,9 @@ class CommentsController {
       const comments = await this.CommentsService.getComment(meetingId);
       res.json({ result: comments });
     } catch (error) {
-      next(error);
+      res.status(error.status||400)
+      res.json({errorMessage:error.message})
+    }}
 
   createComment = async (req, res, next) => {
     try {
@@ -21,7 +23,7 @@ class CommentsController {
       const { comment } = req.body;
       const userId = user.userId;
       if (!comment) {
-        res.status(400).send("내용이 없습니다.");
+        throw new InvalidParamsError('게시글이 존재하지 않는데요.');
       }
 
       const comments = await this.CommentsService.createComment(
@@ -31,7 +33,8 @@ class CommentsController {
       );
       res.send("댓글 작성이 완료되었습니다.");
     } catch (error) {
-      next(error);
+        res.status(error.status||400)
+        res.json({errorMessage:error.message})
     }
   };
 
@@ -43,7 +46,7 @@ class CommentsController {
       const userId = user.userId;
 
       if (!comment) {
-        res.status(400).send("내용이 없습니다.");
+        throw new InvalidParamsError('게시글이 존재하지 않는데요.');
       }
 
       const comments = await this.CommentsService.updateComment(
@@ -53,7 +56,8 @@ class CommentsController {
       );
       res.send("수정이 완료되었습니다.");
     } catch (error) {
-      next(error);
+        res.status(error.status||400)
+        res.json({errorMessage:error.message})
     }
   };
 
@@ -66,10 +70,15 @@ class CommentsController {
         commentId,
         userId
       );
-      res.send("삭제가 완료되었습니다.");
+      res.status(200).json({
+        data: comments,
+        message: '댓글 삭제했어요.',
+        });
     } catch (error) {
-      next(error);
+        res.status(error.status||400)
+        res.json({errorMessage:error.message})
     }
   };
 }
+
 module.exports = CommentsController;
