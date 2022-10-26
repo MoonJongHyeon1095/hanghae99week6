@@ -53,6 +53,6 @@ router.get(
   passport.authenticate('google', { scope: ['profile', 'email'] })
 ); // 프로필과 이메일 정보를 받음.
 // 구글 서버 로그인이 되면, redicrect url을 통해 요청 재전달
-router.get('/test/callback', googleCallback);
+router.get('/test/callback', googleCallback, function(req,res){res.redirect('/')});
 
 module.exports = router;
