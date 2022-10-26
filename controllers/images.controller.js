@@ -21,9 +21,9 @@ class ImagesController {
 
   uploadImages = async (req, res, next) => {
     try {
-      const { userId } = res.locals.user;
-      const { meetingId } = req.params;
-      console.log(meetingId);
+      // const { userId } = res.locals.user;
+      // const { meetingId } = req.params;
+      // console.log(meetingId);
 
       const images = req.files;
       const imageUrls = images.map((img) => img.location);

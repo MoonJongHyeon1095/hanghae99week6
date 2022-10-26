@@ -23,7 +23,7 @@ class UserRepository {
     return user;
   };
 
-  findByEmail = async ({ email }) => {
+  findByEmail = async ( email ) => {
     const user = await Users.findOne({
       where: {
         email,
@@ -31,6 +31,10 @@ class UserRepository {
     });
     return user;
   };
+
+  findById = async (userId) => {
+    await Users.findByPk(userId)
+  }
 }
 
 module.exports = UserRepository;

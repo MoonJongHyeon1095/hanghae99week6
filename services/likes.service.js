@@ -54,8 +54,11 @@ class LikesService {
                 islike: like
               })
               });
+
+            
               data.push(result);
             
+      
             return data;
           };
 

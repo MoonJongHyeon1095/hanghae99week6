@@ -5,7 +5,8 @@ class MeetingsController {
     
     findAllMeeting = async(req,res,next)=>{
         try{
-            const findallmeeting = await this.meetingsService.findAllMeeting();
+            const {userId} = res.locals.user;
+            const findallmeeting = await this.meetingsService.findAllMeeting(userId);
             res.status(200).json({data:findallmeeting});
         }catch(err){
             next(err)       
@@ -13,8 +14,9 @@ class MeetingsController {
     }
     findOneMeeting = async(req,res,next)=>{
         try{
+            const {userId} = res.locals.user;
             const {meetingId} = req.params;
-            const findonemeeting = await this.meetingsService.findOneMeeting(meetingId);
+            const findonemeeting = await this.meetingsService.findOneMeeting(userId, meetingId);
             res.status(200).json({data:findonemeeting})
         }catch(err){
             next(err) 
