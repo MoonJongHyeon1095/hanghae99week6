@@ -13,7 +13,6 @@ const app = express();
 const http = Http.createServer(app);
 const port = process.env.EXPRESS_PORT || 3000;
 
-
 app.use(cors());
 
 passportConfig();
@@ -43,7 +42,6 @@ app.use('/comments', require('./routes/comments.routes'));
 app.use('/likes', require('./routes/likes.routes'))
 app.use('/participates', require('./routes/participates.routes'))
 
-app.use('/images', require('./routes/images.routes'))
 app.use(errorLogger); // Error Logger
 app.use(errorHandler); // Error Handler
 

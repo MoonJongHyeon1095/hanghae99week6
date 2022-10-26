@@ -31,7 +31,6 @@ class UserService {
       nickname,
       password,
     });
-
     return;
   };
 
