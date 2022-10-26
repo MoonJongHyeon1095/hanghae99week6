@@ -38,10 +38,8 @@ const googleCallback = (req, res, next) => {
         res.cookie('accessToken', accessToken);
 
         result = { userId, accessToken, refreshToken, nickname };
-        res.status(201).json({
-          user: result,
-          msg: '구글 로그인 성공!',
-        });
+
+        res.redirect(`${process.env.FRONT_URL}accesstoken=${accessToken}@refreshtoken=${refreshToken}`);
       }
     )(req, res, next);
   } catch (error) {
