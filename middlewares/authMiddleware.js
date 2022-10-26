@@ -12,6 +12,13 @@ module.exports = async (req, res, next) => {
       refreshToken = refT;
     }
 
+    if (!req.headers.auth){
+      res.status(403).send({
+        errorMessage: '쿠키도 없고 토큰도 없는 당신, 대체 이 경로를 어떻게 들어온거죠?',
+      });
+      return; 
+    } 
+
     if (!req.cookies) {
       const { accessToken: accT, refreshToken: refT } = req.headers.auth;
       accessToken = accT;
