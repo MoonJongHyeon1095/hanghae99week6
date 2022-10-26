@@ -58,7 +58,7 @@ class CommentService {
       comment
     );
     if (!updatedComment)
-      throw new new ValidationError("너가 쓴 댓글이 아닐 거 같은데?")();
+      throw new ValidationError("너가 쓴 댓글이 아닐 거 같은데?")();
 
     return updatedComment;
   };
