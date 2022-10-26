@@ -13,7 +13,10 @@ const app = express();
 const http = Http.createServer(app);
 const port = process.env.EXPRESS_PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: true, // 출처 허용 옵션
+  credential: true // 사용자 인증이 필요한 리소스(쿠키 ..등) 접근
+}));
 
 passportConfig();
 app.use(express.static('public'));
