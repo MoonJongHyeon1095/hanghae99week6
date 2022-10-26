@@ -1,9 +1,18 @@
 const MeetingsService = require("../services/meetings.service");
+const ImagesService = require("../services/images.service")
 const aws = require("aws-sdk");
 require("dotenv").config();
 
 class ImagesController {
   meetingsService = new MeetingsService();
+  imagesService = new ImagesService();
+
+  //해당 게시글 이미지url 조회
+  findAllImages = async ( meetingId ) => {
+    const findAllImage = await this.imagesService.findAllImages(meetingId);
+    return findAllImage.imageUrl;
+  };
+
 
   uploadImage = async (req, res, next) => {
     try {
@@ -21,20 +30,20 @@ class ImagesController {
 
   uploadImages = async (req, res, next) => {
     try {
-      // const { userId } = res.locals.user;
-      // const { meetingId } = req.params;
-      // console.log(meetingId);
+      const { userId } = res.locals.user;
+      const { meetingId } = req.params;
+      console.log(meetingId);
 
       const images = req.files;
       const imageUrls = images.map((img) => img.location);
+      console.log(imageUrls)
 
       if (!images) {
         res.status(400).send({ message: "이미지가 없다." });
         return;
       }
 
-      //이미지url을 DB에 저장할 필요가 없어 보입니다.
-      //await this.meetingsService.uploadImages(imageUrls, userId, meetingId);
+      await this.imagesService.uploadImages(imageUrls, userId, meetingId);
 
       res.status(200).send(imageUrls);
     } catch (error) {
@@ -46,6 +55,9 @@ class ImagesController {
     try {
       const { name } = req.body;
       console.log(name);
+
+      const imageUrl = name;
+      await this.imagesService.deleteImage(imageUrl)
 
       const s3 = new aws.S3({
         accessKeyId: process.env.AWS_ACCESS_KEYID,
@@ -69,6 +81,7 @@ class ImagesController {
       }
       */
       });
+
     } catch (error) {
       next(error);
     }

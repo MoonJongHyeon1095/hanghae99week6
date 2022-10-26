@@ -21,11 +21,11 @@ class MeetingsRepository {
     });
   };
 
-    /**유저가 좋아요 눌렀는지 조회 */
-    findOneLike = async (userId, meetingId) =>{
-        const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
-        return findOneLike;
-    };
+  /**유저가 좋아요 눌렀는지 조회 */
+  findOneLike = async (userId, meetingId) => {
+    const findOneLike = await Likes.findOne({ where: { userId, meetingId } });
+    return findOneLike;
+  };
 
   /**게시글 생성
    * @param {Number} userId 작성자ID
@@ -54,15 +54,6 @@ class MeetingsRepository {
   deleteMeeting = async (meetingId, userId) => {
     await Meetings.destroy({ where: { meetingId, userId } });
   };
-
-  /**
- * 이미지url을 DB에 저장할 필요가 없어 보입니다.
- * 
-//이미지 업로드
-uploadImages = async (uploadedImages, userId, meetingId) => {
-    await Meetings.update({imageUrls : uploadedImages},{where:{meetingId,userId}})
-}
-*/
 }
 
 module.exports = MeetingsRepository;
