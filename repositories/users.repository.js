@@ -45,6 +45,13 @@ class UserRepository {
   findById = async (userId) => {
     await Users.findByPk(userId)
   }
+
+  updateToken = async (refreshToken,userId) =>{
+    await Users.update(
+      { refreshToken },
+      { where: { userId: userId } }
+    );
+  }
 }
 
 module.exports = UserRepository;

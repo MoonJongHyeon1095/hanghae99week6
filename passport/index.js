@@ -1,6 +1,7 @@
 require('dotenv').config();
 const passport = require('passport');
 const kakao = require('./kakaoStrategy');
+const google = require('./googleStrategy');
 
 //로그인 시에만 실행
 module.exports = () => {
@@ -11,5 +12,6 @@ module.exports = () => {
   passport.deserializeUser((user, done) => {
     done(null, user);
   });
+  google();
   kakao();
 };
