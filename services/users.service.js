@@ -2,7 +2,7 @@ const {
   DuplicateDBDataError,
   ValidationError,
 } = require("../exceptions/index.exception");
-const UserRepository = require("../repositories/Users.repository");
+const UserRepository = require("../repositories/users.repository");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
