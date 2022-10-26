@@ -45,30 +45,36 @@ class UserService {
     const { email, password } = req.body;
     
     //로그인 하려는 유저 회원검증
-    console.log("1111111111111111111111111111111111111")
     const user = await this.userRepository.findByEmail( email );
     if (!user) throw new ValidationError("그런 사람 없어요. 회원가입 했어요?");
+
+    //유저정보가 있을시 userId선언(편의상선언)
+    let userId;
+    if(user){ userId = user.userId;}
     
     // 패스워드 검증
     const isEqualPassword = await bcrypt.compare(password, user.password);
     if (!isEqualPassword) throw new ValidationError("비번이 틀렸어요.");
-    console.log("22222222222222222222222222222222222222")
+    
     // const expires = new Date();
     // expires.setMinutes(expires.getMinutes() + 60); //쿠키 만료시간 60분
 
     /**accessToken 발급 */
     const accessToken = jwt.sign(
-      { userId: user.userId },
+      { userId: userId },
       process.env.SECRET_KEY,
       { expiresIn: '10s' }
     );
 
     /**refreshToken 발급 */
     const refreshToken = jwt.sign(
-      { userId: user.userId },
+      { userId: userId },
       process.env.SECRET_KEY,
       { expiresIn: '7d' }
     );
+
+    /**refreshToken 유저정보에 저장(업데이트) */
+    await this.userRepository.updateToken(refreshToken,userId);
 
     /**쿠키에 Token전송 */
     res.cookie('refreshToken', refreshToken);

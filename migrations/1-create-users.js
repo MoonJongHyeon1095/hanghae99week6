@@ -11,7 +11,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       nickname: {
         type: Sequelize.DataTypes.STRING,
@@ -19,7 +19,11 @@ module.exports = {
       },
       password: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      refreshToken:{
+        type: Sequelize.DataTypes.STRING,
+        allowNull: true,
       },
       snsId: {
         type: Sequelize.DataTypes.STRING,

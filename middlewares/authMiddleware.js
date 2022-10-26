@@ -7,6 +7,8 @@ module.exports = async (req, res, next) => {
   try {
     
     const { accessToken, refreshToken } = req.cookies;
+    console.log(accessToken)
+    console.log(refreshToken)
 
     if (!accessToken || !refreshToken) {
       return res.status(403).send({
@@ -45,7 +47,9 @@ module.exports = async (req, res, next) => {
     if (!isAccessTokenValidate) {
 
       /**refresh토큰 에서 유저정보 받아오기 */
+      console.log(jwt.verify(refreshToken, process.env.SECRET_KEY));
       const { userId } = jwt.verify(refreshToken, process.env.SECRET_KEY);
+      console.log(userId);
 
       /**AccessToken 재발급 */
       const newAccessToken = jwt.sign({ userId: userId }, process.env.SECRET_KEY, { expiresIn: '10s' });
@@ -55,7 +59,7 @@ module.exports = async (req, res, next) => {
 
       /**새로 발급받은 토큰전송 */
       res.cookie('accessToken', newAccessToken);
-      console.log("토큰 재발급")
+      console.log("토큰 재발급");
 
       /**로그인 유저정보 저장 */
       res.locals.user = user;
@@ -64,7 +68,6 @@ module.exports = async (req, res, next) => {
     const user = await Users.findByPk(userId);
     res.locals.user = user;
     }
-
 
     next();
   } catch (error) {
