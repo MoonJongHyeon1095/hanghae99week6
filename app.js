@@ -37,6 +37,7 @@ app.use(express.json());;
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/', require('./routes/facebook.routes'));
 app.use('/', require('./routes/kakao.routes'));
 app.use('/', require('./routes/users.routes'));
 app.use('/', require('./routes/google.routes'));
