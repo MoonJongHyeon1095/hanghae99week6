@@ -6,7 +6,7 @@ const {
      } = require('../../fixtures/comment.fixtures');
 
 
-const mockNaverUsersModel = () => ({
+const mockCommentModel = () => ({
     findAll: jest.fn(),
     findOne: jest.fn(),
     create: jest.fn(),
@@ -15,7 +15,7 @@ const mockNaverUsersModel = () => ({
 
 describe('comment Test',()=>{
 let commentRepository= new CommentRepository()
-commentRepository.Comments = mockNaverUsersModel();
+commentRepository.Comments = mockCommentModel();
 
 beforeEach(()=>{
     jest.resetAllMocks()

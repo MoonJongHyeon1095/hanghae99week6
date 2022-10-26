@@ -12,14 +12,14 @@ class CommentsController {
             const comments = await this.CommentsService.getComment(
                 meetingId
             )
-            res.json({result : comments})
+            res.status(201).json({result : comments})
         }catch(error){
             next(error)
         }
     }
     
     createComment = async (req,res,next) =>{
-        try {
+        // try {
             const {meetingId} = req.params;
             const {user} = res.locals;
             const {comment} = req.body
@@ -32,9 +32,9 @@ class CommentsController {
                 meetingId,userId,comment
             )
                 res.send("댓글 작성이 완료되었습니다.")
-        }catch(error){
-            next(error)
-        }
+        // }catch(error){
+        //     next(error)
+        // }
     }
 
     updateComment = async (req,res,next) =>{

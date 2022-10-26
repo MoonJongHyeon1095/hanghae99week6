@@ -11,3 +11,14 @@ exports.commentInput={
     userId: 1,
     comment: "testsss"
   }
+
+  exports.requestParams = {
+    meetingId : 1,
+    
+  }
+
+  
+exports.responseLocalsUser = {
+    userId : 1,
+    nickname : 'test'
+  }
