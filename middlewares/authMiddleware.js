@@ -5,10 +5,9 @@ require('dotenv').config();
 // 유저 인증에 실패하면 403 상태 코드를 반환한다.
 module.exports = async (req, res, next) => {
   try {
-    
-    const { accessToken, refreshToken } = req.cookies;
-    console.log(accessToken)
-    console.log(refreshToken)
+    const { accessToken, refreshToken } = req.headers.auth;
+    // console.log(accessToken)
+    // console.log(refreshToken)
 
     if (!accessToken || !refreshToken) {
       return res.status(403).send({
