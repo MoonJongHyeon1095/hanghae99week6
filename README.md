@@ -129,4 +129,4 @@ Multer S3 관련
 
 ## ERD
 
-![스크린샷 2022-10-26 오후 8 15 35](https://user-images.githubusercontent.com/109948801/198012922-659837e3-5aa3-4c85-a5dd-28b0459dc1e6.png)
+![image](https://user-images.githubusercontent.com/98438390/198239580-b70c1b0d-35d4-4c11-a94c-c01d1b68366b.png)
