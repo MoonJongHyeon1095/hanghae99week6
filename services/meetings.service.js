@@ -107,7 +107,10 @@ class MeetingsService {
       title,
       content
     );
-    return { result: true, message: "게시글이 생성되었습니다." };
+    const data =await this.meetingRepository.findAllMeeting()
+    const newMeetingId = data[data.length-1].meetingId
+    
+    return { result: true, message: "게시글이 생성되었습니다.", meetingId: newMeetingId };
   };
 
   /**게시글 수정 서비스
