@@ -27,8 +27,7 @@ class ImagesService {
   //이미지 업로드
   uploadImages = async (imageUrls, userId, meetingId) => {
     const foundData = await this.meetingRepository.findOneMeeting(
-      meetingId,
-      userId
+      meetingId
     );
     if (!foundData) {
       throw new ValidationError("게시글을 찾을 수 없습니다.");

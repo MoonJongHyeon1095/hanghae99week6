@@ -1,10 +1,6 @@
-const { Images, Meetings } = require("../models");
+const { Images } = require("../models");
 
 class ImagesRepository {
-  /**좋아요 요청한 게시글 찾아오기
-   * @param userId 좋아요한거 찾아올 유저ID
-   * @param meetingId 좋아요 요청한 게시글ID
-   */
 
   //게시글 이미지 조회
   findAllImages = async ( meetingId ) => {
@@ -21,7 +17,8 @@ class ImagesRepository {
 
   //이미지 업로드
   uploadImages = async (imageUrl, userId, meetingId) => {
-    await Images.create({ imageUrl, userId, meetingId });
+    const uploadImagesData = await Images.create({ imageUrl : imageUrl, userId: userId, meetingId : meetingId });
+    return uploadImagesData
   };
 }
 module.exports = ImagesRepository;

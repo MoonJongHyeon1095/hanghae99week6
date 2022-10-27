@@ -6,6 +6,7 @@ class LikesController {
   /**좋아요수정 컨트롤러 */
   put = async (req, res, next) => {
     try {
+      console.log('22222222222222')
       /**종아요 수정요청을 한 유저ID */
       const userId = res.locals.user.userId;
 

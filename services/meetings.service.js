@@ -13,8 +13,6 @@ class MeetingsService {
     let data = [];
     let isLike;
     const AllMeetings = await this.meetingRepository.findAllMeeting();
-    console.log(AllMeetings)
-    console.log(AllMeetings[0].Images)
 
     for (const meeting of AllMeetings) {
       let meetingId = meeting.meetingId;
@@ -37,6 +35,7 @@ class MeetingsService {
         updatedAt: meeting.updatedAt,
         participateCount: meeting.participateCount,
         likeCount: meeting.likeCount,
+        images : meeting.Images,
         isLike,
       });
     }
@@ -90,6 +89,7 @@ class MeetingsService {
       updatedAt: findonemeeting.updatedAt,
       likeCount: findonemeeting.likeCount,
       participateCount: findonemeeting.participateCount,
+      imageUrl: findonemeeting.Images,
       isLike,
       participantsList,
     };
@@ -134,7 +134,6 @@ class MeetingsService {
   updateMeeting = async (meetingId, userId, title, content) => {
     const updatemeeting = await this.meetingRepository.findOneMeeting(
       meetingId,
-      userId
     );
     if (!title || !content) {
       throw new InvalidParamsError("제목이나 내용을 기입해주세요!");
@@ -159,8 +158,7 @@ class MeetingsService {
 
   deleteMeeting = async (meetingId, userId) => {
     const deletemeeting = await this.meetingRepository.findOneMeeting(
-      meetingId,
-      userId
+      meetingId
     );
     if (!deletemeeting) {
       throw new ValidationError("게시글을 찾을 수 없습니다.");

@@ -27,6 +27,10 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      MeetingMeetingId:{
+        type: Sequelize.STRING,
+        allowNull: true,
+        },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -100,10 +100,10 @@ class MeetingsController {
   deleteMeeting = async (req, res, next) => {
     try {
       /**게시글 삭제 요청한 유저ID */
-      const userId = res.locals.user.userId;
+      const {userId} = res.locals.user;
 
       /**삭제할 게시글ID */
-      const meetingId = req.params.meetingId;
+      const {meetingId} = req.params;
 
       /**게시글이 삭제되면서 S3 이미지도 함께 삭제 */
       //이미지 찾기 및 가공

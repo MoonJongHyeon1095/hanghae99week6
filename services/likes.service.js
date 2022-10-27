@@ -14,6 +14,7 @@ class LikesService {
    * @returns 좋아요 정보
    */
   findOneLike = async ({ userId, meetingId }) => {
+    console.log('33333333333333')
     const findOneLike = await this.likeRepository.findOneLike({
       userId,
       meetingId,
@@ -48,7 +49,7 @@ class LikesService {
    */
   cancelLike = async ({ userId, meetingId }) => {
     //게시글이 존재하는지 확인 없을시 에러
-    const findMeeting = await this.meetingRepository.findOneMeeting(meetingId);
+    const findMeeting = await this.meetingRepository.findOneMeeting({meetingId});
     if (!findMeeting) {
       throw new ValidationError("존재하지 않는 게시글 입니다");
     }

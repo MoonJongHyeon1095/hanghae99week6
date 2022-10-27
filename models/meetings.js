@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       });
       this.hasMany(models.Images, {
         as: 'Images',
-        foreginKey: 'meetingId'
+        foreignKey: 'meetingId'
       })
     }
   }
