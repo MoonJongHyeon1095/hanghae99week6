@@ -1,12 +1,11 @@
-// const express = require('express');
-// const router = express.Router();
-// const authMiddleware = require('../middlewares/authMiddleware')
+const {Router} = require('express');
+const imagesRouter = Router()
+const ImagesController = require('../controllers/images.controller')
+const imagesController = new ImagesController()
+const authMiddleware = require('../middlewares/authMiddleware')
+const upload = require('../util/multer')
 
-// const ImagesController = require('../controllers/images.controller')
-// const imagesController = new ImagesController()
+imagesRouter.post('/:meetingId', authMiddleware, upload.array('image',5), imagesController.uploadImages );
+imagesRouter.delete('/:meetingId', authMiddleware, imagesController.deleteImage );
 
-// const upload = require('../util/multer')
-
-
-// router.post('/', authMiddleware, upload.array('image',5), imagesController.uploadImages );
-// module.exports = router;
+module.exports = imagesRouter;

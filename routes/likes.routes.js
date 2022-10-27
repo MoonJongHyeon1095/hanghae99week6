@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
+const {Router} = require('express');
+const likesRouter = Router()
 const authMiddleware = require('../middlewares/authMiddleware')
 
 const LikesController = require('../controllers/likes.controller');
 const likesController = new LikesController();
 
-router.put('/:meetingId', authMiddleware,likesController.put);
+likesRouter.put('/:meetingId', authMiddleware,likesController.put);
 
 
-module.exports = router;
+module.exports = likesRouter;

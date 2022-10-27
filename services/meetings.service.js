@@ -7,15 +7,17 @@ const MeetingsRepository = require("../repositories/meetings.repository");
 
 class MeetingsService {
   meetingRepository = new MeetingsRepository();
-
+  
   /**게시글 전체 조회 서비스 */
   findAllMeeting = async (userId) => {
     let data = [];
     let isLike;
     const AllMeetings = await this.meetingRepository.findAllMeeting();
+    console.log(AllMeetings)
+    console.log(AllMeetings[0].Images)
 
     for (const meeting of AllMeetings) {
-      const meetingId = meeting.meetingId;
+      let meetingId = meeting.meetingId;
       const foundOneLike = await this.meetingRepository.findOneLike(
         userId,
         meetingId
@@ -63,8 +65,12 @@ class MeetingsService {
     for (const participant of participants) {
       const { userId } = participant;
       const participatedUser = await this.meetingRepository.findById(userId);
-      if(participatedUser){participantsList.push({email: participatedUser.email, nickname: participant.nickname});}
-      
+      if (participatedUser) {
+        participantsList.push({
+          email: participatedUser.email,
+          nickname: participant.nickname,
+        });
+      }
     }
 
     let isLike;
@@ -107,10 +113,14 @@ class MeetingsService {
       title,
       content
     );
-    const data =await this.meetingRepository.findAllMeeting()
-    const newMeetingId = data[data.length-1].meetingId
-    
-    return { result: true, message: "게시글이 생성되었습니다.", meetingId: newMeetingId };
+    const data = await this.meetingRepository.findAllMeeting();
+    const newMeetingId = data[data.length - 1].meetingId;
+
+    return {
+      result: true,
+      message: "게시글이 생성되었습니다.",
+      meetingId: newMeetingId,
+    };
   };
 
   /**게시글 수정 서비스
@@ -162,21 +172,5 @@ class MeetingsService {
     return { result: true, message: "게시글이 삭제되었습니다." };
   };
 
-  /**
- * 
- * 이미지url을 DB에 저장할 필요가 없어 보입니다.
- * 
-    uploadImages = async(imageUrls, userId, meetingId)=> {
-        const foundData = await this.meetingRepository.findOneMeeting(meetingId,userId);
-        if(!foundData){
-            throw new ValidationError("게시글을 찾을 수 없습니다.")
-        }
-
-        const uploadedImages = imageUrls.join()
-
-        const uploadImagesData = await this.meetingRepository.uploadImages(uploadedImages, userId, meetingId)
-        return uploadImagesData
-    }
-    */
 }
 module.exports = MeetingsService;

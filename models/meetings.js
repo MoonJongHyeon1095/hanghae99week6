@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'Likes',
         foreignKey: 'meetingId'
       });
+      this.hasMany(models.Images, {
+        as: 'Images',
+        foreginKey: 'meetingId'
+      })
     }
   }
 
@@ -58,10 +62,6 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING,
       allowNull: false,
     },
-    imageUrls:{
-      type:DataTypes.STRING,
-      allowNull: true,
-    }
   }, {
     sequelize,
     modelName: 'Meetings',

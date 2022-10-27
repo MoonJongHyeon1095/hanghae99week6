@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const {Router} = require('express');
+const googleRouter = Router()
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { Users } = require('../models');
@@ -48,11 +48,11 @@ const googleCallback = (req, res, next) => {
 };
 
 // 로그인페이지로 이동
-router.get(
+googleRouter.get(
   '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 ); // 프로필과 이메일 정보를 받음.
 // 구글 서버 로그인이 되면, redicrect url을 통해 요청 재전달
-router.get('/test/callback', googleCallback);
+googleRouter.get('/test/callback', googleCallback);
 
-module.exports = router;
+module.exports = googleRouter;

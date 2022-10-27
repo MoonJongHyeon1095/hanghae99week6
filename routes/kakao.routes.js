@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+const {Router} = require('express');
+const kakaoRouter = Router()
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { Users } = require("../models");
@@ -43,7 +43,7 @@ const kakaoCallback = (req, res, next) => {
 };
 
 // 로그인페이지로 이동
-router.get(
+kakaoRouter.get(
   "/kakao",
   passport.authenticate("kakao", {
     scope: ["profile_nickname", "account_email"],
@@ -51,6 +51,6 @@ router.get(
 );
 
 // 카카오에서 설정한 redicrect url을 통해 요청 재전달
-router.get("/kakao/callback", kakaoCallback);
+kakaoRouter.get("/kakao/callback", kakaoCallback);
 
-module.exports = router;
+module.exports =kakaoRouter;

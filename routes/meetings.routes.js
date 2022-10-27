@@ -1,22 +1,16 @@
-const express = require('express');
-const router = express.Router();
+const {Router} = require('express');
+const meetingsRouter = Router()
 const authMiddleware = require('../middlewares/authMiddleware')
 const MeetingsController = require('../controllers/meetings.controller');
 const meetingsController = new MeetingsController();
-const ImagesController = require('../controllers/images.controller')
-const imagesController = new ImagesController()
-
-const upload = require('../util/multer')
 
 
 
-router.delete('/:meetingId/images', authMiddleware, imagesController.deleteImage );
-router.get('/', authMiddleware, meetingsController.findAllMeeting);
-router.get('/:meetingId', authMiddleware, meetingsController.findOneMeeting);
-router.post('/', authMiddleware,meetingsController.createMeeting);
-router.put('/:meetingId', authMiddleware,meetingsController.updateMeeting);
-router.delete('/:meetingId', authMiddleware,meetingsController.deleteMeeting);
-router.post('/:meetingId/images', authMiddleware, upload.array('image',5), imagesController.uploadImages );
 
+meetingsRouter.get('/', authMiddleware, meetingsController.findAllMeeting);
+meetingsRouter.post('/', authMiddleware,meetingsController.createMeeting);
+meetingsRouter.get('/:meetingId', authMiddleware, meetingsController.findOneMeeting);
+meetingsRouter.put('/:meetingId', authMiddleware,meetingsController.updateMeeting);
+meetingsRouter.delete('/:meetingId', authMiddleware,meetingsController.deleteMeeting);
 
-module.exports = router;
+module.exports = meetingsRouter;
