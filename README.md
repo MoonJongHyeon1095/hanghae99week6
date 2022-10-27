@@ -129,5 +129,5 @@ Multer S3 관련
 
 ## ERD
 
-![ERD](https://user-images.githubusercontent.com/98438390/198233067-f286fbad-7418-4c01-8991-c8f70e2d2c50.png)
+![image](https://user-images.githubusercontent.com/98438390/198239580-b70c1b0d-35d4-4c11-a94c-c01d1b68366b.png)
 
