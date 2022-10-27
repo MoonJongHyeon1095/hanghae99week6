@@ -1,7 +1,12 @@
 const MeetingsService = require("../services/meetings.service");
+const ImagesService = require("../services/images.service");
+const aws = require("aws-sdk");
+require("dotenv").config();
+
 
 class MeetingsController {
   meetingsService = new MeetingsService();
+  imagesService = new ImagesService();
 
   /**미팅게시글 전체 불러오기 컨트롤러*/
   findAllMeeting = async (req, res, next) => {
@@ -99,6 +104,37 @@ class MeetingsController {
 
       /**삭제할 게시글ID */
       const meetingId = req.params.meetingId;
+
+      /**게시글이 삭제되면서 S3 이미지도 함께 삭제 */
+      //이미지 찾기 및 가공
+      const foundAllImages = await this.imagesService.findAllImages(meetingId);
+      console.log('foundAllImages:',foundAllImages)
+      console.log(foundAllImages[0].imageUrl)
+
+      for (let i = 0; i < foundAllImages.length; i++) {
+        let name = foundAllImages[i].imageUrl.split("com/")[1];
+        console.log("이미지이름:", name);
+
+        //s3 버켓 이미지 삭제
+        const s3 = new aws.S3({
+          accessKeyId: process.env.AWS_ACCESS_KEYID,
+          secretAccessKey: process.env.AWS_ACCESS_SECRET_KEY,
+          region: process.env.AWS_KEY_REGION,
+        });
+
+        const params = {
+          Bucket: process.env.AWS_BUCKET,
+          Key: name,
+        };
+
+        s3.deleteObject(params, function (err, data) {
+          if (err) {
+            console.log(err, err.stack);
+          } else {
+            next(err)
+          }
+        });
+     }
 
       /**게시글 삭제 서비스 호출 */
       const deletemeeting = await this.meetingsService.deleteMeeting(

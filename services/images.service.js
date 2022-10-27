@@ -1,3 +1,4 @@
+const { ValidationError } = require("../exceptions/index.exception");
 const ImagesRepository = require("../repositories/images.repository");
 const MeetingsRepository = require("../repositories/meetings.repository");
 
@@ -17,6 +18,9 @@ class ImagesService {
   deleteImage = async (imageUrl) => {
     const targetUrl = `https://hanghae99week6.s3.ap-northeast-2.amazonaws.com/${imageUrl}`
     const deleteImage = await this.imagesRepository.deleteImage(targetUrl);
+    if (!deleteImage) {
+      throw new ValidationError("삭제할 이미지가 DB에 없습니다.");
+    }
     return deleteImage;
   };
 
