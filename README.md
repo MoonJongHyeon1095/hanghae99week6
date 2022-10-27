@@ -32,7 +32,11 @@ https://excalidraw.com/#room=050e1181906a87f2b2b0,QUiV1km1hkJVEKoVQZpetA
 - 모임모집 게시글 CRUD
 - 모임모집 게시글에 대한 참여 및 좋아요 표시 CRUD
 - 모임모집 게시글에 대한 댓글 CRUD
-- 회원가입 및 로그인 : JWT토큰 발행 및 Passport를 이용한 소셜로그인   
+- 마이페이지에 유저가 좋아요 표시한 게시글, 참가 표시한 게시글 노출
+- 회원가입 및 로그인 : JWT토큰 발행 및 Passport를 이용한 소셜로그인
+- 이미지 업로드시 파일은 S3에 저장, 경로는 DB에 저장
+- 이미지 삭제시 S3와 DB 모두 삭제
+- 게시글 삭제시 S3와 DB 모두 이미지 자동으로 삭제
 
 <br>   
    
@@ -66,6 +70,7 @@ Multer S3 관련
 [이미지 업로드 라우터 경로 문제](https://github.com/MoonJongHyeon1095/hanghae99week6/issues/14#issue-1419573072)   
 
 </details>
+  
 
   
    
