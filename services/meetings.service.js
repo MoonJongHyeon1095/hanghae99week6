@@ -15,7 +15,7 @@ class MeetingsService {
     const AllMeetings = await this.meetingRepository.findAllMeeting();
 
     for (const meeting of AllMeetings) {
-      const meetingId = meeting.meetingId;
+      let meetingId = meeting.meetingId;
       const foundOneLike = await this.meetingRepository.findOneLike(
         userId,
         meetingId
@@ -35,6 +35,7 @@ class MeetingsService {
         updatedAt: meeting.updatedAt,
         participateCount: meeting.participateCount,
         likeCount: meeting.likeCount,
+        images : meeting.Images,
         isLike,
       });
     }
@@ -84,6 +85,7 @@ class MeetingsService {
       updatedAt: findonemeeting.updatedAt,
       likeCount: findonemeeting.likeCount,
       participateCount: findonemeeting.participateCount,
+      imageUrl: findonemeeting.Images,
       isLike,
       participantsList,
     };
@@ -107,7 +109,11 @@ class MeetingsService {
       title,
       content
     );
-    return { result: true, message: "게시글이 생성되었습니다." };
+    const data =await this.meetingRepository.findAllMeeting()
+    const newMeetingId = data[data.length-1].meetingId
+    
+    return { result: true, message: "게시글이 생성되었습니다.", meetingId: newMeetingId };
+
   };
 
   /**게시글 수정 서비스
@@ -121,7 +127,6 @@ class MeetingsService {
   updateMeeting = async (meetingId, userId, title, content) => {
     const updatemeeting = await this.meetingRepository.findOneMeeting(
       meetingId,
-      userId
     );
     if (!title || !content) {
       throw new InvalidParamsError("제목이나 내용을 기입해주세요!");

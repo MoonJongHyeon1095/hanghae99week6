@@ -1,4 +1,5 @@
-const { Meetings, Likes, Participates, Users } = require("../models");
+const { Meetings, Likes, Participates, Users, Images } = require("../models");
+
 
 class MeetingsRepository {
   findById = async (userId) => {
@@ -7,7 +8,10 @@ class MeetingsRepository {
 
   /**게시글 전체조회 */
   findAllMeeting = async () => {
-    return await Meetings.findAll({});
+    return await Meetings.findAll({
+      include: [ {models: Images, as: 'Images'} ]
+    });
+
   };
 
   /**게시글 단일조회
@@ -17,7 +21,11 @@ class MeetingsRepository {
   findOneMeeting = async (meetingId) => {
     return await Meetings.findOne({
       where: { meetingId },
-      include: { model: Participates, as: "Participates" },
+      include: [
+        { model: Participates, as: 'Participates', key: 'meetingId' },
+        { model: Images, as: 'Images', key: 'meetingId'},
+      ],
+
     });
   };
 

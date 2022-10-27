@@ -11,7 +11,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       nickname: {
         type: Sequelize.DataTypes.STRING,
