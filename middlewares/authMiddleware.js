@@ -6,27 +6,31 @@ require('dotenv').config();
 module.exports = async (req, res, next) => {
   try {
     //배포 전에는 이 코드는 죽여야 합니다.
-    if (req.cookies) {
-      const { accessToken: accT, refreshToken: refT } = req.cookies;
-      accessToken = accT;
-      refreshToken = refT;
-    } else if (!req.headers.auth){
-      res.status(403).send({
-        errorMessage: '쿠키도 없고 토큰도 없는 당신, 대체 이 경로를 어떻게 들어온거죠?',
-      });
-      return; 
-    } 
+    // if (req.cookies) {
+    //   const { accessToken: accT, refreshToken: refT } = req.cookies;
+    //   accessToken = accT;
+    //   refreshToken = refT;
+    // } else if (!req.headers.auth){
+    //   res.status(403).send({
+    //     errorMessage: '쿠키도 없고 토큰도 없는 당신, 대체 이 경로를 어떻게 들어온거죠?',
+    //   });
+    //   return; 
+    // } 
 
-    if (!req.cookies) {
-      const { accessToken: accT, refreshToken: refT } = req.headers.auth;
-      accessToken = accT;
-      refreshToken = refT;
-    }
-
-    //EC2에는 이 코드가 살아야 합니다.
-    //const { accessToken, refreshToken } = req.headers.auth;
+    // if (!req.cookies) {
+    //   const { accessToken: accT, refreshToken: refT } = JSON.parse(req.headers.auth);
+    //   accessToken = accT;
+    //   refreshToken = refT;
+    // }
+    //     console.log(req.headers)
     // console.log(accessToken)
     // console.log(refreshToken)
+
+    //EC2에는 이 코드가 살아야 합니다.
+    const { accessToken, refreshToken } = JSON.parse(req.headers.auth)
+    console.log(req.headers)
+    console.log(accessToken)
+    console.log(refreshToken)
 
     if (!accessToken || !refreshToken) {
       return res.status(403).send({
